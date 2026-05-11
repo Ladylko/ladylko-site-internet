@@ -1,0 +1,321 @@
+/* ============================================
+   LADYLKO — Product Detail Page
+   ============================================ */
+
+/* ---- HEADER ---- */
+.detail-header {
+  background: var(--white);
+  padding: 9rem 0 5rem;
+}
+
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.detail-back:hover { color: var(--prune); }
+
+.detail-header .pill { margin-bottom: 1rem; }
+.detail-header h1 { color: var(--prune); margin-bottom: 1rem; }
+.detail-header h1 em { font-style: italic; color: var(--prune-soft); }
+.detail-header p { max-width: 600px; }
+
+/* ---- SECTION INDEX ---- */
+.section-index {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: var(--poudre);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- DETAIL SECTIONS ---- */
+.detail-section { background: var(--white); }
+.detail-section--alt {
+  background: var(--white);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.detail-grid--reverse { direction: rtl; }
+.detail-grid--reverse > * { direction: ltr; }
+
+.detail-content h2 { margin-bottom: 1rem; }
+
+/* ---- VISUAL BLOCK ---- */
+.detail-visual {
+  position: relative;
+}
+
+.detail-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  min-height: 320px;
+  /* REPLACE with <img src="../assets/..."> */
+}
+
+.detail-tag {
+  position: absolute;
+  bottom: -1rem;
+  right: -1rem;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  box-shadow: 0 4px 30px rgba(107,39,55,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.detail-tag__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.detail-tag__value {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--prune);
+}
+
+/* ---- DETAIL BLOCKS ---- */
+.detail-block {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(107,39,55,0.08);
+}
+
+.detail-block:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.detail-block__title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--prune);
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-body);
+}
+
+.detail-block p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--charcoal);
+}
+
+/* ---- COLOR DISPLAY ---- */
+.color-display {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.color-swatch {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+  margin-top: 2px;
+}
+
+.color-display p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ---- TEMPERATURE BAR ---- */
+.temp-range { margin-top: 0.75rem; }
+
+.temp-bar {
+  position: relative;
+  height: 8px;
+  background: var(--white);
+  border-radius: 100px;
+  margin-bottom: 0.5rem;
+}
+
+.temp-bar__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 70%;
+  background: linear-gradient(to right, var(--rose), var(--prune));
+  border-radius: 100px;
+}
+
+.temp-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+.temp-range p {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--charcoal);
+}
+
+/* ---- NORMS GRID ---- */
+.norm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.norm-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border: 1px solid rgba(107,39,55,0.07);
+  transition: box-shadow var(--duration-mid) var(--ease), transform var(--duration-mid) var(--ease);
+}
+
+.norm-card:hover {
+  box-shadow: 0 8px 40px rgba(107,39,55,0.1);
+  transform: translateY(-3px);
+}
+
+.norm-card__code {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--prune);
+  background: rgba(107,39,55,0.08);
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+}
+
+.norm-card__title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--charcoal);
+}
+
+.norm-card__desc {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ---- MFG GRID ---- */
+.mfg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.mfg-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border: 1px solid rgba(107,39,55,0.07);
+}
+
+.mfg-card--highlight {
+  background: var(--prune);
+  border-color: var(--prune);
+}
+
+.mfg-card--highlight h3,
+.mfg-card--highlight p { color: var(--ivoire); }
+
+.mfg-card--highlight .label { color: var(--rose) !important; }
+
+.mfg-card__flag {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.mfg-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.mfg-card p {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-top: 0.6rem;
+}
+
+/* ---- CTA (réutilisation du style product) ---- */
+.prod-cta-section {
+  background: var(--white);
+}
+
+.prod-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.prod-cta-inner h2 { color: var(--prune); }
+.prod-cta-inner p  { color: var(--prune); opacity: 0.75; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .detail-grid--reverse { direction: ltr; }
+
+  .detail-visual { order: -1; }
+
+  .norm-grid,
+  .mfg-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .detail-tag {
+    position: static;
+    margin-top: 1rem;
+    align-self: flex-start;
+  }
+
+  .prod-cta-inner { flex-direction: column; text-align: center; }
+}
+
+@media (min-width: 900px) and (max-width: 1100px) {
+  .norm-grid { grid-template-columns: repeat(2, 1fr); }
+  .mfg-grid  { grid-template-columns: repeat(2, 1fr); }
+}

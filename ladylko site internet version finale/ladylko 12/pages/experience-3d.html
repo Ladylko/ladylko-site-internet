@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expérience 3D — Short Ladylko en rotation 360°</title>
+<meta name="description" content="Explorez le short cycliste chauffant Ladylko en 3D interactive : ceinture côtelée, modules chauffants, batterie, absorbant amovible. Glissez pour tourner, cliquez pour comprendre.">
+<link rel="canonical" href="https://ladylko.com/pages/experience-3d.html">
+<meta name="theme-color" content="#F4EDE4">
+<meta property="og:title" content="Expérience 3D — Short Ladylko">
+<meta property="og:description" content="Découvrez chaque détail du short Ladylko en rotation 360°.">
+<meta property="og:image" content="../assets/product-main.jpg">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#F4EDE4;color:#1A1A1A;
+  font-family:-apple-system,'SF Pro Display','Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+
+#c{position:fixed;inset:0;width:100vw;height:100vh;display:block;cursor:grab}
+#c:active{cursor:grabbing}
+
+/* ── Couleurs marque ── */
+:root{
+  --prune:#6B2737;
+  --prune-soft:#8B3A4A;
+  --ivoire:#F4EDE4;
+  --accent:#DDAAA2;
+}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 2.5rem;
+  background:rgba(244,237,228,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(107,39,55,.08)}
+.nb{font-size:1.1rem;font-weight:600;letter-spacing:-.02em;color:var(--prune);font-family:'DM Serif Display',Georgia,serif}
+.nb span{color:rgba(107,39,55,.42)}
+.nt{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(26,26,26,.42)}
+.nbk{display:flex;align-items:center;gap:.35rem;font-size:.78rem;
+  color:rgba(26,26,26,.55);text-decoration:none;transition:color .2s}
+.nbk:hover{color:var(--prune)}
+
+/* ── PANNEAU GAUCHE ── */
+#fp{position:fixed;left:4%;top:50%;transform:translateY(-50%);z-index:50;width:280px}
+.fp-head{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(26,26,26,.42);margin-bottom:1rem;padding-left:.2rem}
+
+.fi{display:flex;align-items:center;gap:.75rem;padding:.62rem .9rem;
+  border-radius:14px;cursor:pointer;margin-bottom:.25rem;
+  border:1px solid transparent;transition:all .25s ease;user-select:none}
+.fi:hover{background:rgba(107,39,55,.045)}
+.fi.on{background:rgba(107,39,55,.08);border-color:rgba(107,39,55,.14)}
+
+.fd{width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(26,26,26,.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all .25s;color:rgba(26,26,26,.5)}
+.fi.on .fd{background:var(--prune);border-color:var(--prune);color:#fff}
+.fi:hover .fd{border-color:rgba(107,39,55,.45);color:var(--prune)}
+
+.fl{font-size:.84rem;color:rgba(26,26,26,.62);transition:color .2s}
+.fi.on .fl{color:var(--prune);font-weight:600}
+.fi:hover .fl{color:#1a1a1a}
+
+/* ── INFO CARDS positionnées différemment par feature ── */
+.icard{position:fixed;z-index:50;width:268px;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border:1px solid rgba(107,39,55,.1);border-radius:20px;padding:1.3rem 1.4rem;
+  box-shadow:0 20px 60px -30px rgba(107,39,55,.18);
+  opacity:0;pointer-events:none;transition:opacity .45s ease,transform .45s ease}
+.icard.vis{opacity:1;pointer-events:auto}
+
+/* Positions distinctes pour chaque info */
+#ic0{right:5%;bottom:20%;transform:translateY(14px)}
+#ic0.vis{transform:translateY(0)}
+#ic1{right:5%;top:30%;transform:translateY(-14px)}
+#ic1.vis{transform:translateY(0)}
+#ic2{right:5%;top:40%;transform:translateY(14px)}
+#ic2.vis{transform:translateY(0)}
+#ic3{right:5%;bottom:25%;transform:translateY(14px)}
+#ic3.vis{transform:translateY(0)}
+#ic4{right:5%;top:50%;transform:translateY(14px)}
+#ic4.vis{transform:translateY(0)}
+#ic5{left:38%;bottom:8%;transform:translateY(14px)}
+#ic5.vis{transform:translateY(0)}
+#ic6{right:5%;bottom:15%;transform:translateY(14px)}
+#ic6.vis{transform:translateY(0)}
+
+.ic-lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--prune);margin-bottom:.35rem;font-weight:700}
+.ic-ttl{font-size:1.05rem;font-weight:600;color:#1A1A1A;margin-bottom:.4rem;line-height:1.2}
+.ic-txt{font-size:.78rem;color:rgba(26,26,26,.62);line-height:1.62}
+
+/* ── TITRE INTRO ── */
+#ht{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;z-index:30;pointer-events:none;transition:opacity .7s ease}
+#ht h1{font-size:clamp(1.9rem,3.5vw,3rem);font-weight:600;letter-spacing:-.03em;
+  color:var(--prune);margin-bottom:.4rem;font-family:'DM Serif Display',Georgia,serif}
+#ht p{font-size:.82rem;color:rgba(26,26,26,.45);letter-spacing:.06em}
+
+/* ── HINT DRAG ── */
+#dh{position:fixed;bottom:9%;left:50%;transform:translateX(-50%);z-index:50;
+  display:flex;flex-direction:column;align-items:center;gap:.45rem;
+  color:rgba(26,26,26,.42);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  transition:opacity .5s;animation:hp 2.5s ease-in-out infinite}
+@keyframes hp{0%,100%{opacity:.42}50%{opacity:.85}}
+
+/* ── BARRE ROTATION ── */
+#rr{position:fixed;bottom:7%;left:50%;transform:translateX(-50%);
+  width:100px;height:3px;background:rgba(107,39,55,.1);border-radius:2px;z-index:50;overflow:hidden}
+#rf{height:100%;background:linear-gradient(90deg,var(--prune),var(--prune-soft));width:0%;
+  border-radius:2px;transition:width .08s linear}
+
+/* ── HOTSPOT ── */
+.hs{position:fixed;z-index:45;pointer-events:none;opacity:0;
+  transition:opacity .4s ease;transform:translate(-50%,-50%)}
+.hs.vis{opacity:1}
+.hs-dot{width:11px;height:11px;border-radius:50%;background:var(--prune);
+  box-shadow:0 0 0 3px rgba(107,39,55,.22),0 0 18px rgba(107,39,55,.45);
+  animation:hsp 1.8s ease-in-out infinite}
+@keyframes hsp{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+
+/* ── LOADER ── */
+#ld{position:fixed;inset:0;background:var(--ivoire);z-index:999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;
+  transition:opacity .6s}
+.ld-b{font-size:1.6rem;font-weight:600;letter-spacing:-.02em;color:var(--prune);font-family:'DM Serif Display',Georgia,serif}
+.ld-bar{width:180px;height:2px;background:rgba(107,39,55,.1);border-radius:1px;overflow:hidden}
+.ld-p{height:100%;background:var(--prune);width:0%;border-radius:1px;transition:width .25s}
+.ld-t{font-size:.65rem;color:rgba(26,26,26,.42);letter-spacing:.12em;text-transform:uppercase}
+
+@media(max-width:768px){
+  #fp{left:2%;width:200px}
+  .fl{font-size:.75rem}
+  .icard{width:200px}
+  #ic5{left:28%;bottom:5%}
+}
+</style>
+</head>
+<body>
+
+<div id="ld">
+  <div class="ld-b">Ladylko</div>
+  <div class="ld-bar"><div class="ld-p" id="ldp"></div></div>
+  <div class="ld-t">Chargement du modèle</div>
+</div>
+
+<canvas id="c"></canvas>
+
+<nav id="nav">
+  <a href="../index.html" class="nbk">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Retour
+  </a>
+  <div class="nb">Lady<span>lko</span></div>
+  <div class="nt">Expérience Produit 3D</div>
+</nav>
+
+<div id="ht">
+  <h1>Le Short Ladylko</h1>
+  <p>Glisser pour tourner · Cliquer pour explorer</p>
+</div>
+
+<div id="dh">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 9l7-7 7 7"/><path d="M5 15l7 7 7-7"/></svg>
+  Faites glisser
+</div>
+
+<div id="rr"><div id="rf"></div></div>
+
+<!-- Panneau fonctionnalités -->
+<div id="fp">
+  <div class="fp-head">Fonctionnalités</div>
+
+  <div class="fi on" data-i="0" onclick="go(this)">
+    <div class="fd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+    </div>
+    <span class="fl">Vue d'ensemble</span>
+  </div>
+
+  <div class="fi" data-i="1" onclick="go(this)">
+    <div class="fd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 8V6a2 2 0 014 0v2"/><path d="M13 8V6a2 2 0 014 0v2"/></svg>
+    </div>
+    <span class="fl">Ceinture côtelée 12 cm</span>
+  </div>
+
+  <div class="fi" data-i="2" onclick="go(this)">
+    <div class="fd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
+    </div>
+    <span class="fl">Chaleur abdomen — 45°C</span>
+  </div>
+
+  <div class="fi" data-i="3" onclick="go(this)">
+    <div class="fd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
+    </div>
+    <span class="fl">Chaleur lombaires — dos</span>
+  </div>
+
+  <div class="fi" data-i="4" onclick="go(this)">
+    <div class="fd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="7" width="15" height="10" rx="2"/><path d="M20 11v2"/></svg>
+    </div>
+    <span class="fl">Batterie 8h — côté droit</span>
+  </div>
+
+  <div class="fi" data-i="5" onclick="go(this)">
+    <div class="fd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="4" y="6" width="16" height="14" rx="3"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+    </div>
+    <span class="fl">Poche chauffante avant</span>
+  </div>
+
+  <div class="fi" data-i="6" onclick="go(this)">
+    <div class="fd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <span class="fl">Absorbant amovible</span>
+  </div>
+</div>
+
+<!-- Info cards — positions distinctes -->
+<div class="icard" id="ic0"><div class="ic-lbl">Vue d'ensemble</div><div class="ic-ttl">Short cycliste Ladylko</div><div class="ic-txt">90% polyamide · 10% élasthanne · Coloris bordeaux prune · Taille haute 12 cm. Glisser pour explorer chaque face.</div></div>
+<div class="icard" id="ic1"><div class="ic-lbl">Ceinture</div><div class="ic-ttl">Ceinture côtelée 12 cm</div><div class="ic-txt">Structure intérieure accueillant le module chauffant. 10 côtes en relief pour un maintien optimal toute la journée.</div></div>
+<div class="icard" id="ic2"><div class="ic-lbl">Chaleur avant</div><div class="ic-ttl">Module abdomen — jusqu'à 45°C</div><div class="ic-txt">Câbles graphène tissés en ceinture. Diffusion homogène sur l'abdomen. Capteur thermique de sécurité intégré.</div></div>
+<div class="icard" id="ic3"><div class="ic-lbl">Chaleur dos</div><div class="ic-ttl">Module lombaires — dos</div><div class="ic-txt">Zone chauffante dorsale symétrique. Soulagement ciblé des douleurs lombaires simultanément à l'abdomen.</div></div>
+<div class="icard" id="ic4"><div class="ic-lbl">Batterie</div><div class="ic-ttl">2 500 mAh · 8h d'autonomie</div><div class="ic-txt">Batterie externe slim côté droit. Rechargeable USB-C. Invisible sous les vêtements. Échangeable en déplacement.</div></div>
+<div class="icard" id="ic5"><div class="ic-lbl">Poche chauffante</div><div class="ic-ttl">Poche module avant</div><div class="ic-txt">Poche rectangulaire arrondie côté avant gauche. Accueille le module chauffant de manière invisible et sécurisée.</div></div>
+<div class="icard" id="ic6"><div class="ic-lbl">Protection absorbante</div><div class="ic-ttl">Absorbant amovible · Zéro déchet</div><div class="ic-txt">4 pressions nickel-free. Set de 3 serviettes lavables. Se retire en 1 seconde. 200+ cycles de lavage garantis.</div></div>
+
+<!-- Hotspot -->
+<div class="hs" id="hs"><div class="hs-dot"></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════════
+   LADYLKO 3D — Short cycliste fidèle au produit
+   Reconstruit d'après photos réelles
+═══════════════════════════════════════════════ */
+
+// ── Features config ──
+const FEATS = [
+  { card:'ic0', rotY:0,           camY:.10, camZ:4.8, hs:null },
+  { card:'ic1', rotY:0,           camY:.82, camZ:2.9, hs:[.5,.18] },
+  { card:'ic2', rotY:0,           camY:.58, camZ:2.7, hs:[.5,.30] },
+  { card:'ic3', rotY:Math.PI,     camY:.58, camZ:2.7, hs:[.5,.28] },
+  { card:'ic4', rotY:Math.PI*.5,  camY:.75, camZ:2.8, hs:[.73,.22] },
+  { card:'ic5', rotY:0,           camY:.12, camZ:2.5, hs:[.38,.47] },
+  { card:'ic6', rotY:.1,          camY:-.08,camZ:2.6, hs:[.5,.62] },
+];
+let cur = 0, isDriven=false, titleHidden=false;
+
+// ── Renderer ──
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.setClearColor(0xF4EDE4,1);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xF4EDE4);
+
+const W=innerWidth, H=innerHeight;
+const cam = new THREE.PerspectiveCamera(36, W/H, .1, 50);
+cam.position.set(0,.1,4.8);
+renderer.setSize(W,H);
+
+// ── Lumières studio clair (fond blanc/ivoire) ──
+scene.add(new THREE.AmbientLight(0xffffff,.78));
+
+const key = new THREE.DirectionalLight(0xffffff, 1.45);
+key.position.set(-2.5,5,4.5);
+key.castShadow=true;
+key.shadow.mapSize.set(2048,2048);
+key.shadow.camera.left=-2.5; key.shadow.camera.right=2.5;
+key.shadow.camera.top=4; key.shadow.camera.bottom=-2;
+key.shadow.radius=6;
+scene.add(key);
+
+const fill = new THREE.DirectionalLight(0xffeef2,.45);
+fill.position.set(4,0,3); scene.add(fill);
+
+const rim = new THREE.DirectionalLight(0xfff5fa,.55);
+rim.position.set(0,.5,-6); scene.add(rim);
+
+const bot = new THREE.DirectionalLight(0xf2e1e8,.22);
+bot.position.set(0,-5,2); scene.add(bot);
+
+// ── Matériaux (palette officielle Ladylko : Bordeaux Velours) ──
+const BORDEAUX = 0x6B2737;  // Bordeaux Velours — couleur principale
+const DARK     = 0x4A1A26;  // Bordeaux foncé pour ourlets / coutures
+const MID      = 0x7E2F40;  // Bordeaux ceinture (légère variation)
+const SNAP_C   = 0x9a9a9a;
+
+const mFab = new THREE.MeshStandardMaterial({color:BORDEAUX, roughness:.86, metalness:.01});
+const mCei = new THREE.MeshStandardMaterial({color:MID,      roughness:.78, metalness:.01});
+const mDrk = new THREE.MeshStandardMaterial({color:DARK,     roughness:.90, metalness:0});
+const mSnp = new THREE.MeshStandardMaterial({color:SNAP_C,   roughness:.20, metalness:.88});
+const mBat = new THREE.MeshStandardMaterial({color:0x1c1c1c, roughness:.5,  metalness:.6});
+
+// Matériaux chaleur (partagés pour animation)
+const mHeatF = new THREE.MeshStandardMaterial({color:DARK, roughness:.82, metalness:0,
+  emissive:new THREE.Color(0xff3800), emissiveIntensity:0});
+const mHeatB = new THREE.MeshStandardMaterial({color:DARK, roughness:.82, metalness:0,
+  emissive:new THREE.Color(0xff3800), emissiveIntensity:0});
+
+// ── Groupe racine ──
+const G = new THREE.Group();
+G.position.y = -.38;
+scene.add(G);
+
+/* ══════════════════════════════════════
+   GÉOMÉTRIE FIDÈLE AU PRODUIT
+   
+   Proportions clés d'après les photos :
+   - Ceinture haute : occupe ~28% hauteur totale
+   - Corps + entrejambe : ~32%  
+   - Jambes courtes et larges : ~40%
+   - Largeur ceinture ≈ largeur corps
+   - Poche avant gauche bien visible
+   - Couleur prune bordeaux profonde
+══════════════════════════════════════ */
+
+// ─── CEINTURE HAUTE (très haute, côtelée) ───────────────────────
+// D'après photo : ceinture = quasi 1/3 de la hauteur totale du short
+const WR  = .72;  // radius ceinture
+const WH  = .68;  // hauteur ceinture (GRANDE)
+
+const wMesh = new THREE.Mesh(
+  new THREE.CylinderGeometry(WR-.01, WR+.02, WH, 96, 1, true), mCei);
+wMesh.position.y = .78; wMesh.castShadow=true; G.add(wMesh);
+
+// Rebord supérieur plat
+const wTop = new THREE.Mesh(
+  new THREE.TorusGeometry(WR-.01, .030, 16, 96), mCei);
+wTop.rotation.x=Math.PI/2; wTop.position.y=1.12; G.add(wTop);
+
+// Fermeture haut (petite bande épaisse)
+const wCap = new THREE.Mesh(
+  new THREE.CylinderGeometry(WR-.01, WR-.01, .025, 96), mDrk);
+wCap.position.y=1.10; G.add(wCap);
+
+// Rebord bas ceinture (transition vers corps)
+const wBot = new THREE.Mesh(
+  new THREE.TorusGeometry(WR+.025, .020, 12, 96), mDrk);
+wBot.rotation.x=Math.PI/2; wBot.position.y=.44; G.add(wBot);
+
+// Côtes horizontales — 11 traits en relief
+for(let i=0;i<11;i++){
+  const t=i/10;
+  const r=WR-.01+(WR+.02-(WR-.01))*t;
+  const rib=new THREE.Mesh(
+    new THREE.TorusGeometry(r+.005, .0075, 8, 96), mDrk);
+  rib.rotation.x=Math.PI/2;
+  rib.position.y=1.08-i*.058;
+  G.add(rib);
+}
+
+// Petite étiquette LADYLKO (bande texturée)
+const lbl=new THREE.Mesh(
+  new THREE.BoxGeometry(.28,.038,.006),
+  new THREE.MeshStandardMaterial({color:0x2a0c18,roughness:.7,metalness:.1}));
+lbl.position.set(0,.96,WR+.018); G.add(lbl);
+
+// ─── CORPS PRINCIPAL ────────────────────────────────────────────
+// Forme légèrement évasée, aplatie front/back (forme humaine)
+const BH = .58;
+const bGeo = new THREE.CylinderGeometry(WR+.025, WR+.065, BH, 96, 3, true);
+const bMesh= new THREE.Mesh(bGeo, mFab);
+bMesh.position.y=.14; bMesh.castShadow=true; G.add(bMesh);
+
+// Aplat avant/dos (mesh ovale — scale Z plus petit)
+bMesh.scale.set(1, 1, .88);
+
+// ─── ENTREJAMBE ARRONDI ─────────────────────────────────────────
+const cGeo=new THREE.SphereGeometry(.4,48,32,0,Math.PI*2,Math.PI*.4,Math.PI*.58);
+const cMesh=new THREE.Mesh(cGeo,mFab);
+cMesh.scale.set(1,1,.82);
+cMesh.position.y=-.20; cMesh.castShadow=true; G.add(cMesh);
+
+// ─── JAMBES — courtes, larges, cycliste ─────────────────────────
+// D'après photos : jambes très larges (~demi-cuisse) et courtes
+const LH=.62, LTR=.37, LBR=.32, LSEP=.275;
+[[-1,.05],[1,-.05]].forEach(([sx,rz])=>{
+  const lg=new THREE.Mesh(
+    new THREE.CylinderGeometry(LTR, LBR, LH, 48, 2, true), mFab);
+  lg.position.set(sx*LSEP,-.62,0);
+  lg.rotation.z=rz; lg.scale.set(1,1,.84); lg.castShadow=true; G.add(lg);
+  
+  // Ourlet bas — rebord double
+  const h1=new THREE.Mesh(new THREE.TorusGeometry(LBR,.020,10,48),mDrk);
+  h1.rotation.x=Math.PI/2; h1.scale.set(1,1,.84);
+  h1.position.set(sx*LSEP,-.94,0); G.add(h1);
+  const h2=new THREE.Mesh(new THREE.TorusGeometry(LBR-.008,.010,8,48),mDrk);
+  h2.rotation.x=Math.PI/2; h2.scale.set(1,1,.84);
+  h2.position.set(sx*LSEP,-.97,0); G.add(h2);
+});
+
+// Séparation jambes (couture entrejambe)
+const sCurve=new THREE.LineCurve3(
+  new THREE.Vector3(0,.42,.58), new THREE.Vector3(0,-.95,.48));
+G.add(new THREE.Mesh(
+  new THREE.TubeGeometry(sCurve,20,.0075,6,false),mDrk));
+
+// ─── POCHE AVANT GAUCHE ─────────────────────────────────────────
+// C'est LA signature du produit — rectangulaire arrondie, bombée
+// Position : corps gauche, en hauteur milieu
+
+// Bosse principale poche
+const pShape = new THREE.Shape();
+const pw=.34, ph=.28, pr=.065;
+pShape.moveTo(-pw/2+pr,-ph/2);
+pShape.lineTo(pw/2-pr,-ph/2);
+pShape.quadraticCurveTo(pw/2,-ph/2,pw/2,-ph/2+pr);
+pShape.lineTo(pw/2,ph/2-pr);
+pShape.quadraticCurveTo(pw/2,ph/2,pw/2-pr,ph/2);
+pShape.lineTo(-pw/2+pr,ph/2);
+pShape.quadraticCurveTo(-pw/2,ph/2,-pw/2,ph/2-pr);
+pShape.lineTo(-pw/2,-ph/2+pr);
+pShape.quadraticCurveTo(-pw/2,-ph/2,-pw/2+pr,-ph/2);
+
+const pExt={depth:.072,bevelEnabled:true,bevelThickness:.012,bevelSize:.012,bevelSegments:6};
+const pGeo=new THREE.ExtrudeGeometry(pShape,pExt);
+const pMesh=new THREE.Mesh(pGeo,mFab);
+pMesh.position.set(-.20,.22,.64); // légèrement à gauche, face avant
+pMesh.rotation.y=.08; // légèrement tourné
+pMesh.castShadow=true; G.add(pMesh);
+
+// Couture contour poche
+const pcGeo=new THREE.TorusGeometry(.185,.011,8,80);
+const pc=new THREE.Mesh(pcGeo,mDrk);
+pc.scale.set(1.8,.68,1); pc.rotation.x=Math.PI/2-.22;
+pc.position.set(-.20,.185,.695); G.add(pc);
+
+// ─── MODULE CHAUFFANT AVANT (dans la ceinture) ──────────────────
+const hfGeo=new THREE.SphereGeometry(.48,48,24,0,Math.PI*2,0,Math.PI*.36);
+const hfMesh=new THREE.Mesh(hfGeo, mHeatF);
+hfMesh.scale.set(1.06,.24,.52);
+hfMesh.rotation.x=Math.PI;
+hfMesh.position.set(0,.62,.60); G.add(hfMesh);
+
+// Câbles chauffants avant
+for(let i=0;i<3;i++){
+  const cv=new THREE.QuadraticBezierCurve3(
+    new THREE.Vector3(-.50,.71-i*.034,.62),
+    new THREE.Vector3(0,.67-i*.034,.71),
+    new THREE.Vector3(.50,.71-i*.034,.62));
+  const cm_m=new THREE.MeshStandardMaterial({
+    color:0x2a0808, emissive:new THREE.Color(0xff3800), emissiveIntensity:0,
+    roughness:.55, metalness:.2});
+  const cbl=new THREE.Mesh(new THREE.TubeGeometry(cv,28,.0060,6,false),cm_m);
+  cbl.userData.isHeatFront=true; G.add(cbl);
+}
+
+// ─── MODULE CHAUFFANT DOS ────────────────────────────────────────
+const hbGeo=new THREE.SphereGeometry(.50,48,24,0,Math.PI*2,0,Math.PI*.36);
+const hbMesh=new THREE.Mesh(hbGeo, mHeatB);
+hbMesh.scale.set(1.10,.25,.50);
+hbMesh.rotation.x=Math.PI;
+hbMesh.position.set(0,.60,-.60); G.add(hbMesh);
+
+for(let i=0;i<3;i++){
+  const cv=new THREE.QuadraticBezierCurve3(
+    new THREE.Vector3(-.46,.70-i*.036,-.64),
+    new THREE.Vector3(0,.66-i*.036,-.72),
+    new THREE.Vector3(.46,.70-i*.036,-.64));
+  const cm_m=new THREE.MeshStandardMaterial({
+    color:0x2a0808, emissive:new THREE.Color(0xff3800), emissiveIntensity:0,
+    roughness:.55, metalness:.2});
+  const cbl=new THREE.Mesh(new THREE.TubeGeometry(cv,28,.0060,6,false),cm_m);
+  cbl.userData.isHeatBack=true; G.add(cbl);
+}
+
+// ─── CONNECTEUR BATTERIE DROIT + BATTERIE ───────────────────────
+const port=new THREE.Mesh(new THREE.CylinderGeometry(.034,.034,.085,12),mBat);
+port.rotation.z=Math.PI/2; port.position.set(.755,.80,.05); G.add(port);
+
+const batt=new THREE.Mesh(new THREE.BoxGeometry(.115,.07,.26),mBat);
+batt.position.set(.90,.80,.03); G.add(batt);
+
+// LED verte batterie
+const led=new THREE.Mesh(new THREE.CircleGeometry(.009,12),
+  new THREE.MeshStandardMaterial({color:0x00dd00,emissive:new THREE.Color(0x00ff00),emissiveIntensity:1}));
+led.position.set(.855,.815,.165); led.rotation.y=Math.PI/2; G.add(led);
+
+// ─── PRESSIONS ABSORBANT ─────────────────────────────────────────
+[[-0.10,-.18,.60],[.10,-.18,.60],[-.10,-.42,.57],[.10,-.42,.57]].forEach(([x,y,z])=>{
+  const sn=new THREE.Mesh(new THREE.CylinderGeometry(.026,.026,.014,16),mSnp);
+  sn.rotation.x=Math.PI/2; sn.position.set(x,y,z); G.add(sn);
+  const sr=new THREE.Mesh(new THREE.TorusGeometry(.030,.005,8,16),mSnp);
+  sr.rotation.x=Math.PI/2; sr.position.set(x,y,z+.008); G.add(sr);
+});
+
+// ─── OMBRE SOL (douce sur fond clair) ───────────────────────────
+const shad=new THREE.Mesh(
+  new THREE.CircleGeometry(1.18,56),
+  new THREE.MeshBasicMaterial({color:0x6B2737,transparent:true,opacity:.16,depthWrite:false}));
+shad.rotation.x=-Math.PI/2; shad.position.y=-1.14; scene.add(shad);
+
+/* ══════════════════════════════════════
+   CAMERA STATE
+══════════════════════════════════════ */
+let tCamY=.10, tCamZ=4.8, cCamY=.10, cCamZ=4.8;
+let tRotY=0, cRotY=0, velX=0, isDrag=false, isHeat=false;
+
+function lerp(a,b,t){return a+(b-a)*t}
+
+/* ── Drag ── */
+let lx=0;
+const onDown=e=>{isDrag=true;isDriven=false;lx=e.touches?e.touches[0].clientX:e.clientX;velX=0;hideTitle()};
+const onMove=e=>{
+  if(!isDrag)return;
+  const cx=e.touches?e.touches[0].clientX:e.clientX;
+  velX=cx-lx; tRotY+=(cx-lx)*.013; lx=cx;
+  document.getElementById('rf').style.width=(((tRotY%(Math.PI*2)+Math.PI*2)%(Math.PI*2))/(Math.PI*2)*100)+'%';
+};
+const onUp=()=>{isDrag=false};
+
+canvas.addEventListener('mousedown',onDown);
+window.addEventListener('mousemove',onMove);
+window.addEventListener('mouseup',onUp);
+canvas.addEventListener('touchstart',onDown,{passive:true});
+canvas.addEventListener('touchmove',onMove,{passive:true});
+canvas.addEventListener('touchend',onUp);
+window.addEventListener('wheel',e=>{tCamZ=Math.max(2,Math.min(7,tCamZ+e.deltaY*.003))},{passive:true});
+
+/* ── Feature click ── */
+function go(el){
+  document.querySelectorAll('.fi').forEach(i=>i.classList.remove('on'));
+  el.classList.add('on');
+  cur=+el.dataset.i;
+  const f=FEATS[cur];
+
+  // Cartes
+  document.querySelectorAll('.icard').forEach(c=>c.classList.remove('vis'));
+  document.getElementById(f.card).classList.add('vis');
+
+  // Caméra
+  tCamY=f.camY; tCamZ=f.camZ; tRotY=f.rotY;
+  isDriven=true;
+
+  // Chaleur
+  isHeat=(cur===2||cur===3);
+  if(!isHeat){
+    mHeatF.emissiveIntensity=0; mHeatB.emissiveIntensity=0;
+    G.traverse(c=>{if(c.userData.isHeatFront||c.userData.isHeatBack)c.material.emissiveIntensity=0});
+  }
+
+  // Hotspot
+  if(f.hs){
+    const hs=document.getElementById('hs');
+    hs.style.left=(f.hs[0]*100)+'%'; hs.style.top=(f.hs[1]*100)+'%';
+    hs.classList.add('vis');
+    setTimeout(()=>hs.classList.remove('vis'),3200);
+  }
+  hideTitle();
+}
+
+// Afficher carte overview par défaut
+document.getElementById('ic0').classList.add('vis');
+
+function hideTitle(){
+  if(titleHidden)return; titleHidden=true;
+  document.getElementById('ht').style.opacity='0';
+  document.getElementById('dh').style.opacity='0';
+}
+
+/* ── Loop ── */
+let clk=0, hp=0;
+function animate(){
+  requestAnimationFrame(animate); clk+=.016;
+  if(!isDrag){velX*=.90; if(!isDriven)tRotY+=velX*.007;}
+  cRotY=lerp(cRotY,tRotY,.065); G.rotation.y=cRotY;
+  cCamY=lerp(cCamY,tCamY,.055); cCamZ=lerp(cCamZ,tCamZ,.055);
+  cam.position.set(0,cCamY,cCamZ); cam.lookAt(0,cCamY-.05,0);
+  G.position.y=-.38+Math.sin(clk*.55)*.016;
+
+  if(isHeat){
+    hp+=.05; const p=.5+.5*Math.sin(hp*2.2);
+    mHeatF.emissiveIntensity=p*.9; mHeatB.emissiveIntensity=p*.9;
+    G.traverse(c=>{
+      if(c.userData.isHeatFront)c.material.emissiveIntensity=p*.5;
+      if(c.userData.isHeatBack)c.material.emissiveIntensity=p*.5;
+    });
+  }
+  renderer.render(scene,cam);
+}
+
+/* ── Loader ── */
+const lp=document.getElementById('ldp'); let pct=0;
+const lt=setInterval(()=>{
+  pct+=Math.random()*16;
+  if(pct>=100){pct=100;clearInterval(lt);
+    setTimeout(()=>{const d=document.getElementById('ld');d.style.opacity='0';
+      setTimeout(()=>d.style.display='none',600);},250);}
+  lp.style.width=pct+'%';
+},70);
+
+/* ── Resize ── */
+window.addEventListener('resize',()=>{
+  const w=innerWidth,h=innerHeight;
+  cam.aspect=w/h; cam.updateProjectionMatrix(); renderer.setSize(w,h);
+});
+
+animate();
+</script>
+</body>
+</html>

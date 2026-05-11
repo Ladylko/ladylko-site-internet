@@ -1,0 +1,164 @@
+/* ============================================
+   LADYLKO — Blog Page
+   ============================================ */
+
+/* ---- HEADER ---- */
+.blog-header {
+  background: var(--white);
+  padding: 10rem 0 5rem;
+}
+
+.blog-header .pill { margin-bottom: 1.5rem; }
+.blog-header h1 {
+  color: var(--prune);
+  margin-bottom: 1rem;
+}
+.blog-header h1 em {
+  font-style: italic;
+  color: var(--prune-soft);
+}
+.blog-header p { color: var(--muted); max-width: 500px; }
+
+/* ---- GRID ---- */
+.blog-grid-section { background: var(--white); }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+}
+
+/* ---- CARTE — lien entier ---- */
+.blog-card--link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.blog-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid rgba(107,39,55,0.09);
+  transition: box-shadow var(--duration-mid) var(--ease), transform var(--duration-mid) var(--ease), border-color var(--duration-mid) var(--ease);
+}
+
+.blog-card:hover {
+  box-shadow: 0 10px 50px rgba(107,39,55,0.12);
+  transform: translateY(-5px);
+  border-color: rgba(107,39,55,0.22);
+}
+
+/* Featured : occupe toute la colonne gauche */
+.blog-card--featured {
+  grid-row: 1 / 3;
+}
+
+/* ---- IMAGE ---- */
+.blog-card__img-wrap {
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--ivoire);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.blog-card__img-wrap img {
+  object-fit: contain !important;
+  background: var(--ivoire);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.blog-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #F3F0EE;
+  min-height: 160px;
+  transition: transform var(--duration-slow) var(--ease);
+  /* REPLACE: <img src="../assets/articleX.jpg" alt=""> */
+}
+
+.blog-card:hover .blog-card__img-placeholder {
+  transform: scale(1.03);
+}
+
+/* ---- CONTENT ---- */
+.blog-card__content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.blog-card--featured .blog-card__content {
+  padding: 2rem;
+}
+
+.blog-card__content .pill { align-self: flex-start; }
+.blog-card__content h2,
+.blog-card__content h3 {
+  line-height: 1.3;
+  font-size: 1.15rem;
+  color: var(--charcoal);
+}
+.blog-card--featured h2 { font-size: 1.4rem; }
+
+/* ---- FOOTER DE CARTE ---- */
+.blog-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.blog-card__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--prune);
+  letter-spacing: 0.03em;
+  transition: gap var(--duration-fast) var(--ease);
+}
+
+.blog-card:hover .blog-card__read {
+  gap: 0.55rem;
+}
+
+/* ---- NEWSLETTER ---- */
+.blog-newsletter {
+  background: var(--white);
+}
+
+.blog-newsletter__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nl-form {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.nl-form .form-input { min-width: 240px; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-card--featured { grid-row: auto; }
+  .blog-newsletter__inner { flex-direction: column; }
+  .nl-form { flex-direction: column; width: 100%; }
+  .nl-form .form-input { min-width: 0; }
+  .nl-form .btn { width: 100%; justify-content: center; }
+}
