@@ -50,11 +50,13 @@ function applyContactTranslations(lang) {
 
 function initContact() {
   // Sujet toggle
+  let selectedSubject = '';
   const subjects = document.querySelectorAll('.ct-subject-btn');
   subjects.forEach(btn => {
     btn.addEventListener('click', () => {
       subjects.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+      selectedSubject = btn.dataset.value || '';
     });
   });
 
@@ -81,13 +83,42 @@ function initContact() {
     if (!valid) return;
 
     const btn = document.getElementById('ct-submit');
+    const btnText = document.getElementById('ct-submit-text');
+    const originalText = btnText.textContent;
     btn.disabled = true;
-    document.getElementById('ct-submit-text').textContent = '...';
+    btnText.textContent = '...';
 
-    setTimeout(() => {
-      document.getElementById('ct-form-card').style.display = 'none';
-      document.getElementById('ct-success').style.display   = 'block';
-    }, 800);
+    const entry = {
+      name:    name.value.trim(),
+      email:   email.value.trim(),
+      subject: selectedSubject,
+      message: message.value.trim(),
+      lang:    localStorage.getItem('ladylko_lang') || 'fr'
+    };
+
+    // Enregistrement sur la plateforme (Vercel — /api/contact)
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || 'Erreur réseau');
+        }
+        document.getElementById('ct-form-card').style.display = 'none';
+        document.getElementById('ct-success').style.display   = 'block';
+      })
+      .catch((err) => {
+        console.error('Contact submit error:', err);
+        btn.disabled = false;
+        btnText.textContent = originalText;
+        const lang = localStorage.getItem('ladylko_lang') || 'fr';
+        alert(lang === 'fr'
+          ? "Une erreur est survenue. Merci de réessayer dans un instant."
+          : 'Something went wrong. Please try again in a moment.');
+      });
   });
 }
 
