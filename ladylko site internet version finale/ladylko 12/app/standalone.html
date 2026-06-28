@@ -928,7 +928,7 @@ img { display: block; max-width: 100%; }
 
   /* ---------- Helpers DOM ---------- */
   function $(s, r) { return (r || document).querySelector(s); }
-  function $(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function el(tag, cls, html) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -978,8 +978,8 @@ img { display: block; max-width: 100%; }
     create: "Créer un post", connections: "Connexions", brand: "Charte & Canva", help: "Guide rapide"
   };
   function go(name) {
-    $(".section").forEach(function (s) { s.classList.toggle("active", s.id === name); });
-    $("[data-nav]").forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-nav") === name); });
+    $$(".section").forEach(function (s) { s.classList.toggle("active", s.id === name); });
+    $$("[data-nav]").forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-nav") === name); });
     $("#topTitle").textContent = TITLES[name] || "AdPilot";
     $(".main").scrollTop = 0;
     if (name === "dashboard") renderDashboard();
@@ -995,7 +995,7 @@ img { display: block; max-width: 100%; }
   });
 
   function updateCounts() {
-    $("[data-count='library']").forEach(function (n) { n.textContent = DB.inspirations.length; });
+    $$("[data-count='library']").forEach(function (n) { n.textContent = DB.inspirations.length; });
   }
 
   /* ============================================================
@@ -1107,7 +1107,7 @@ img { display: block; max-width: 100%; }
       grid.appendChild(c);
     });
 
-    $("[data-edit]", grid).forEach(function (b) {
+    $$("[data-edit]", grid).forEach(function (b) {
       b.addEventListener("click", function () { editInspiration(b.getAttribute("data-edit")); });
     });
     updateCounts();
@@ -1368,7 +1368,7 @@ img { display: block; max-width: 100%; }
         '</div>';
       host.appendChild(card);
     });
-    $("[data-conn]", host).forEach(function (b) {
+    $$("[data-conn]", host).forEach(function (b) {
       b.addEventListener("click", function () { connectFlow(b.getAttribute("data-conn")); });
     });
   }
@@ -1429,7 +1429,7 @@ img { display: block; max-width: 100%; }
         '</div>';
       cg.appendChild(card);
     });
-    $("[data-delc]", cg).forEach(function (b) {
+    $$("[data-delc]", cg).forEach(function (b) {
       b.addEventListener("click", function () {
         DB.canva = DB.canva.filter(function (x) { return x.id !== b.getAttribute("data-delc"); });
         save(); renderBrand(); toast("Lien retiré");
@@ -1462,22 +1462,22 @@ img { display: block; max-width: 100%; }
 
   $("#libFilterPlatform").addEventListener("click", function (e) {
     var b = e.target.closest("button"); if (!b) return;
-    $("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
     libState.platform = b.getAttribute("data-f"); renderLibrary();
   });
   $("#libFilterStatus").addEventListener("click", function (e) {
     var b = e.target.closest("button"); if (!b) return;
-    $("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
     libState.status = b.getAttribute("data-s"); renderLibrary();
   });
   $("#libSort").addEventListener("click", function (e) {
     var b = e.target.closest("button"); if (!b) return;
-    $("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
     libState.sort = b.getAttribute("data-o"); renderLibrary();
   });
   $("#planView").addEventListener("click", function (e) {
     var b = e.target.closest("button"); if (!b) return;
-    $("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
     planView = b.getAttribute("data-v"); renderPlanning();
   });
   $("#globalSearch").addEventListener("input", function () {
