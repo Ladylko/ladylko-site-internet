@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AdPilot — Studio marketing Ladylko</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;750&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">L</div>
+      <div>
+        <div class="brand-name">AdPilot</div>
+        <div class="brand-sub">Studio Ladylko</div>
+      </div>
+    </div>
+
+    <button class="nav-item active" data-nav="dashboard"><span class="ico">⌂</span> Accueil</button>
+    <button class="nav-item" data-nav="library"><span class="ico">▦</span> Bibliothèque <span class="badge-count" data-count="library">0</span></button>
+    <button class="nav-item" data-nav="planning"><span class="ico">▤</span> Planning</button>
+    <button class="nav-item" data-nav="create"><span class="ico">＋</span> Créer un post</button>
+
+    <div class="nav-section-label">Comptes</div>
+    <button class="nav-item" data-nav="connections"><span class="ico">⇄</span> Connexions</button>
+    <button class="nav-item" data-nav="brand"><span class="ico">✦</span> Charte &amp; Canva</button>
+
+    <div class="sidebar-footer">
+      <button class="nav-item" data-nav="help"><span class="ico">?</span> Guide rapide</button>
+    </div>
+  </aside>
+
+  <!-- ===================== TOPBAR ===================== -->
+  <header class="topbar">
+    <h1 id="topTitle">Accueil</h1>
+    <div class="spacer"></div>
+    <label class="search">
+      <span>⌕</span>
+      <input id="globalSearch" type="search" placeholder="Rechercher une inspiration, un post…">
+    </label>
+    <button class="icon-btn" title="Notifications">◔</button>
+    <div class="avatar" title="Équipe Ladylko">LK</div>
+  </header>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main">
+
+    <!-- ---------- ACCUEIL ---------- -->
+    <section class="section active" id="dashboard">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Bonjour 👋</div>
+            <div class="page-sub">Voici l'état de vos publications cette semaine.</div>
+          </div>
+          <div class="spacer"></div>
+          <button class="btn btn-primary" data-nav="create">＋ Nouveau post</button>
+        </div>
+
+        <div class="grid grid-4 mb-16" id="statTiles"></div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-head"><h3>Prochaines publications</h3><div class="spacer"></div>
+              <button class="btn btn-sm" data-nav="planning">Voir le planning</button>
+            </div>
+            <div id="upcoming" class="card-pad"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Raccourcis</h3></div>
+            <div class="card-pad grid" style="gap:10px">
+              <a class="btn btn-block" href="https://www.tiktok.com/upload" target="_blank" rel="noopener">▶ Poster sur TikTok</a>
+              <a class="btn btn-block" href="https://business.facebook.com/latest/composer" target="_blank" rel="noopener">◎ Poster / programmer sur Instagram</a>
+              <a class="btn btn-block" href="https://www.canva.com/" target="_blank" rel="noopener">✦ Ouvrir Canva</a>
+              <button class="btn btn-block" data-nav="library">▦ Ouvrir la bibliothèque</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- BIBLIOTHÈQUE ---------- -->
+    <section class="section" id="library">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Bibliothèque d'inspirations</div>
+            <div class="page-sub">Toutes vos idées, prêtes à devenir du contenu — avec l'ordre, l'heure et la méthode de post.</div>
+          </div>
+          <div class="spacer"></div>
+          <button class="btn btn-primary" id="addInspBtn">＋ Ajouter une inspiration</button>
+        </div>
+
+        <div class="flex items-center gap-12 mb-16" style="flex-wrap:wrap">
+          <div class="segmented" id="libFilterPlatform">
+            <button class="active" data-f="all">Tout</button>
+            <button data-f="tiktok">TikTok</button>
+            <button data-f="instagram">Instagram</button>
+          </div>
+          <div class="segmented" id="libFilterStatus">
+            <button class="active" data-s="all">Tous statuts</button>
+            <button data-s="idée">Idées</button>
+            <button data-s="brouillon">Brouillons</button>
+            <button data-s="prêt">Prêts</button>
+            <button data-s="publié">Publiés</button>
+          </div>
+          <div class="spacer"></div>
+          <div class="segmented" id="libSort">
+            <button class="active" data-o="order">Ordre de post</button>
+            <button data-o="importance">Importance</button>
+            <button data-o="date">Date</button>
+          </div>
+        </div>
+
+        <div class="lib-grid" id="libGrid"></div>
+        <div class="empty" id="libEmpty" style="display:none">
+          <div class="ico">▦</div>
+          <h3>Aucune inspiration pour le moment</h3>
+          <p>Ajoutez votre première idée pour commencer à construire vos publications.</p>
+          <button class="btn btn-primary mt-16" id="addInspBtn2">＋ Ajouter une inspiration</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PLANNING ---------- -->
+    <section class="section" id="planning">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Planning des posts</div>
+            <div class="page-sub">Quel contenu, quel jour, à quelle heure — et avec quelle priorité.</div>
+          </div>
+          <div class="spacer"></div>
+          <div class="segmented" id="planView">
+            <button class="active" data-v="list">Liste</button>
+            <button data-v="week">Semaine</button>
+          </div>
+        </div>
+        <div id="planList"></div>
+        <div id="planWeek" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- ---------- CRÉER ---------- (formulaire injecté par JS) -->
+    <section class="section" id="create">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Créer un post</div>
+            <div class="page-sub">Préparez tout ici, puis envoyez en un clic vers TikTok ou Instagram.</div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card card-pad" id="createForm"></div>
+          <div class="card card-pad" id="createPreview"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- CONNEXIONS ---------- -->
+    <section class="section" id="connections">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Connexions</div>
+            <div class="page-sub">Reliez vos comptes pour tout piloter depuis un seul endroit.</div>
+          </div>
+        </div>
+
+        <div class="card mb-16" style="background:var(--info-bg);border-color:#cfe0f5">
+          <div class="card-pad" style="display:flex;gap:12px">
+            <div style="font-size:20px">ⓘ</div>
+            <div>
+              <strong>À savoir avant de connecter</strong>
+              <p class="muted mt-8" style="font-size:13px;line-height:1.5">
+                Ces connexions ont besoin d'un petit serveur sécurisé (back-end) pour fonctionner réellement, ainsi
+                que des accès développeur officiels TikTok / Meta / Canva. Tant que ce n'est pas branché, les boutons
+                ci-dessous expliquent ce qui sera possible. <strong>Important :</strong> TikTok ne permet pas de
+                <em>lire</em> les brouillons faits dans l'app — en revanche AdPilot pourra <em>envoyer</em> vos posts
+                vers TikTok comme brouillons, et récupérer vos statistiques Instagram.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" id="connList" style="gap:12px"></div>
+      </div>
+    </section>
+
+    <!-- ---------- CHARTE & CANVA ---------- -->
+    <section class="section" id="brand">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Charte graphique &amp; Canva</div>
+            <div class="page-sub">Vos couleurs, vos typos et vos modèles Canva, accessibles en un clic.</div>
+          </div>
+        </div>
+
+        <div class="card mb-16">
+          <div class="card-head"><h3>Palette de couleurs</h3></div>
+          <div class="card-pad">
+            <div class="swatches" id="paletteGrid"></div>
+          </div>
+        </div>
+
+        <div class="card mb-16">
+          <div class="card-head"><h3>Typographies</h3></div>
+          <div class="card-pad">
+            <div class="type-row">
+              <div style="font-family:'DM Serif Display',Georgia,serif;font-size:30px">Ladylko</div>
+              <div><strong>Titres</strong><div class="muted" style="font-size:12.5px">DM Serif Display</div></div>
+            </div>
+            <div class="type-row">
+              <div style="font-size:22px;font-weight:600">Le confort qui change tout</div>
+              <div><strong>Corps</strong><div class="muted" style="font-size:12.5px">Inter</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Modèles Canva</h3><div class="spacer"></div>
+            <button class="btn btn-primary btn-sm" id="addCanvaBtn">＋ Ajouter un lien Canva</button>
+          </div>
+          <div class="card-pad">
+            <p class="muted mb-16" style="font-size:13px">
+              Collez ici le lien de partage de vos designs Canva Pro. Pas d'extension, juste des liens simples pour
+              prévisualiser et ouvrir l'édition.
+            </p>
+            <div class="grid grid-3" id="canvaGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- GUIDE ---------- -->
+    <section class="section" id="help">
+      <div class="page">
+        <div class="page-head"><div>
+          <div class="page-title">Guide rapide</div>
+          <div class="page-sub">3 étapes pour publier comme une pro.</div>
+        </div></div>
+        <div class="grid grid-3">
+          <div class="card card-pad"><div style="font-size:26px">①</div><h3 class="mt-8">Mettre l'inspiration</h3><p class="muted mt-8" style="font-size:13px">Dans la Bibliothèque, ajoutez une idée : image/lien, plateforme, et la légende.</p></div>
+          <div class="card card-pad"><div style="font-size:26px">②</div><h3 class="mt-8">Choisir quand &amp; comment</h3><p class="muted mt-8" style="font-size:13px">Réglez le jour, l'heure, l'importance et la méthode de post. AdPilot range tout dans le Planning.</p></div>
+          <div class="card card-pad"><div style="font-size:26px">③</div><h3 class="mt-8">Publier en un clic</h3><p class="muted mt-8" style="font-size:13px">Le jour J, ouvrez le post et utilisez le raccourci TikTok/Instagram. Marquez-le « publié » et gardez le lien.</p></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== BOTTOM NAV (mobile/iOS) ===================== -->
+  <nav class="bottom-nav">
+    <button class="active" data-nav="dashboard"><span class="ico">⌂</span> Accueil</button>
+    <button data-nav="library"><span class="ico">▦</span> Biblio</button>
+    <button data-nav="create"><span class="ico">＋</span> Créer</button>
+    <button data-nav="planning"><span class="ico">▤</span> Planning</button>
+    <button data-nav="brand"><span class="ico">✦</span> Charte</button>
+  </nav>
+</div>
+
+<!-- Modale générique -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-head"><h2 id="modalTitle">Titre</h2><div class="spacer"></div>
+      <button class="icon-btn" id="modalClose">✕</button></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

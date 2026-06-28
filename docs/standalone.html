@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AdPilot — Studio marketing Ladylko</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;750&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   AdPilot — Outil marketing Ladylko
+   Design system : structure Shopify (Polaris) + finitions iOS
+   ============================================================ */
+
+:root {
+  /* Chrome neutre (façon admin Shopify) */
+  --bg:            #f1f2f4;
+  --surface:       #ffffff;
+  --surface-soft:  #fafbfb;
+  --surface-hover: #f6f6f7;
+  --border:        #e1e3e5;
+  --border-strong: #c9cccf;
+
+  /* Texte */
+  --text:          #1a1a1a;
+  --text-subdued:  #6d7175;
+  --text-disabled: #9ea3a8;
+
+  /* Marque Ladylko */
+  --prune:   #4F1B64;
+  --prune-d: #3a124b;
+  --prune-l: #f3ecf6;
+  --rose:    #F1B1B4;
+  --poudre:  #F2C4CD;
+  --ivoire:  #FAF7F5;
+
+  /* États */
+  --success:    #0f7b56;
+  --success-bg: #e7f4ee;
+  --warning:    #8a6116;
+  --warning-bg: #fbf3e3;
+  --critical:   #c4290d;
+  --critical-bg:#fdeceb;
+  --info:       #1f5199;
+  --info-bg:    #eaf1fb;
+
+  /* Plateformes */
+  --tiktok:  #000000;
+  --insta:   #c13584;
+  --canva:   #00c4cc;
+
+  /* Forme (iOS = coins ronds, ombres douces) */
+  --r-sm: 8px;
+  --r:    12px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  --shadow-card: 0 1px 0 rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.06);
+  --shadow-pop:  0 4px 16px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.08);
+
+  --sidebar-w: 248px;
+  --topbar-h: 56px;
+
+  --font: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+button { font-family: inherit; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+input, textarea, select { font-family: inherit; font-size: 14px; }
+img { display: block; max-width: 100%; }
+
+/* ============================================================
+   Layout général
+   ============================================================ */
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: var(--topbar-h) 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar main";
+  height: 100vh;
+}
+
+/* ----- Sidebar (façon Shopify) ----- */
+.sidebar {
+  grid-area: sidebar;
+  background: #1a1a1a;
+  color: #d7d9db;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 12px;
+  gap: 4px;
+  overflow-y: auto;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px 14px;
+}
+.brand-logo {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--prune), var(--rose));
+  display: grid; place-items: center;
+  color: #fff; font-weight: 800; font-size: 15px;
+}
+.brand-name { color: #fff; font-weight: 700; font-size: 15px; letter-spacing: -.2px; }
+.brand-sub  { color: #9b9ea1; font-size: 11px; }
+
+.nav-section-label {
+  color: #7c7f83;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 12px 10px 4px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  color: #d7d9db;
+  font-weight: 500;
+  font-size: 13.5px;
+  border: none; background: transparent; width: 100%; text-align: left;
+  transition: background .12s ease;
+}
+.nav-item:hover { background: rgba(255,255,255,.08); color: #fff; }
+.nav-item.active { background: rgba(255,255,255,.14); color: #fff; }
+.nav-item .ico { width: 18px; text-align: center; font-size: 16px; opacity: .9; }
+.nav-item .badge-count {
+  margin-left: auto;
+  background: var(--prune); color: #fff;
+  font-size: 11px; font-weight: 700;
+  border-radius: var(--r-pill);
+  min-width: 18px; height: 18px; padding: 0 5px;
+  display: grid; place-items: center;
+}
+.sidebar-footer { margin-top: auto; padding-top: 12px; }
+
+/* ----- Topbar ----- */
+.topbar {
+  grid-area: topbar;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 20px;
+}
+.topbar h1 { font-size: 15px; font-weight: 650; }
+.topbar .spacer { flex: 1; }
+.search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+  width: 280px; max-width: 34vw;
+  color: var(--text-subdued);
+}
+.search input { border: none; background: transparent; outline: none; width: 100%; }
+.avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--prune), var(--rose));
+  color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 12px;
+}
+.icon-btn {
+  width: 34px; height: 34px; border-radius: var(--r-sm);
+  border: 1px solid transparent; background: transparent;
+  display: grid; place-items: center; font-size: 17px; color: var(--text-subdued);
+}
+.icon-btn:hover { background: var(--surface-hover); }
+
+/* ----- Main ----- */
+.main {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 24px;
+}
+.page { max-width: 1040px; margin: 0 auto; }
+.page-head {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-bottom: 20px;
+}
+.page-title { font-size: 21px; font-weight: 700; letter-spacing: -.3px; }
+.page-sub { color: var(--text-subdued); font-size: 13px; margin-top: 2px; }
+.page-head .spacer { flex: 1; }
+
+.section { display: none; }
+.section.active { display: block; animation: fade .2s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   Cartes
+   ============================================================ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+}
+.card-pad { padding: 18px; }
+.card-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 15px 18px; border-bottom: 1px solid var(--border);
+}
+.card-head h3 { font-size: 14px; font-weight: 650; }
+.card-head .spacer { flex: 1; }
+
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Stat tiles */
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+.stat .label { color: var(--text-subdued); font-size: 12.5px; font-weight: 500; }
+.stat .value { font-size: 26px; font-weight: 750; letter-spacing: -.5px; margin-top: 4px; }
+.stat .delta { font-size: 12px; font-weight: 600; margin-top: 4px; }
+.delta.up { color: var(--success); }
+.delta.down { color: var(--critical); }
+
+/* ============================================================
+   Boutons
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--r-sm);
+  padding: 8px 13px;
+  font-weight: 600; font-size: 13px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);
+  transition: background .12s, border-color .12s, transform .04s;
+}
+.btn:hover { background: var(--surface-hover); }
+.btn:active { transform: translateY(1px); }
+.btn-primary {
+  background: var(--prune); border-color: var(--prune); color: #fff;
+  box-shadow: 0 1px 2px rgba(79,27,100,.3);
+}
+.btn-primary:hover { background: var(--prune-d); }
+.btn-ghost { border-color: transparent; background: transparent; }
+.btn-ghost:hover { background: var(--surface-hover); }
+.btn-danger { color: var(--critical); border-color: var(--border-strong); }
+.btn-danger:hover { background: var(--critical-bg); }
+.btn-sm { padding: 5px 9px; font-size: 12px; }
+.btn-block { width: 100%; justify-content: center; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* ============================================================
+   Badges / pills
+   ============================================================ */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: var(--r-pill);
+  padding: 2px 9px;
+  font-size: 12px; font-weight: 600;
+  background: var(--surface-hover); color: var(--text-subdued);
+}
+.badge.dot::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.badge-success  { background: var(--success-bg);  color: var(--success); }
+.badge-warning  { background: var(--warning-bg);  color: var(--warning); }
+.badge-critical { background: var(--critical-bg); color: var(--critical); }
+.badge-info     { background: var(--info-bg);     color: var(--info); }
+.badge-prune    { background: var(--prune-l);     color: var(--prune); }
+
+.tag {
+  display: inline-flex; align-items: center;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 2px 8px; font-size: 12px; color: var(--text-subdued);
+}
+
+/* ============================================================
+   Champs de formulaire
+   ============================================================ */
+.field { margin-bottom: 14px; }
+.field > label {
+  display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;
+}
+.field .hint { color: var(--text-subdued); font-size: 12px; margin-top: 4px; }
+.input, .textarea, .select {
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  padding: 9px 11px;
+  background: var(--surface);
+  outline: none;
+  transition: border-color .12s, box-shadow .12s;
+}
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--prune);
+  box-shadow: 0 0 0 3px var(--prune-l);
+}
+.textarea { resize: vertical; min-height: 90px; }
+.row { display: flex; gap: 12px; }
+.row > * { flex: 1; }
+
+/* Segmented control (iOS) */
+.segmented {
+  display: inline-flex;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 3px;
+  gap: 3px;
+}
+.segmented button {
+  border: none; background: transparent;
+  padding: 6px 13px; border-radius: 7px;
+  font-size: 13px; font-weight: 600; color: var(--text-subdued);
+  transition: background .14s, color .14s;
+}
+.segmented button.active {
+  background: var(--surface); color: var(--text);
+  box-shadow: 0 1px 2px rgba(0,0,0,.12);
+}
+
+/* Toggle switch (iOS) */
+.switch { position: relative; display: inline-block; width: 46px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .track {
+  position: absolute; inset: 0;
+  background: #d4d6d8; border-radius: var(--r-pill);
+  transition: background .2s;
+}
+.switch .track::before {
+  content: ""; position: absolute; left: 3px; top: 3px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  transition: transform .2s;
+}
+.switch input:checked + .track { background: var(--success); }
+.switch input:checked + .track::before { transform: translateX(18px); }
+
+/* ============================================================
+   Bibliothèque — cartes d'inspiration
+   ============================================================ */
+.lib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.insp {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex; flex-direction: column;
+  transition: transform .12s, box-shadow .12s;
+}
+.insp:hover { transform: translateY(-2px); box-shadow: var(--shadow-pop); }
+.insp-media {
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(135deg, var(--prune-l), var(--poudre));
+  position: relative;
+  display: grid; place-items: center;
+  color: var(--prune); font-size: 30px;
+}
+.insp-media img { width: 100%; height: 100%; object-fit: cover; }
+.insp-order {
+  position: absolute; top: 10px; left: 10px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(0,0,0,.72); color: #fff;
+  display: grid; place-items: center; font-weight: 700; font-size: 13px;
+}
+.insp-platform {
+  position: absolute; top: 10px; right: 10px;
+  width: 26px; height: 26px; border-radius: 7px;
+  background: rgba(255,255,255,.92);
+  display: grid; place-items: center; font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+.insp-body { padding: 12px 13px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.insp-title { font-weight: 650; font-size: 14px; line-height: 1.3; }
+.insp-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.insp-when { color: var(--text-subdued); font-size: 12.5px; display: flex; align-items: center; gap: 6px; }
+.insp-foot {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 13px; border-top: 1px solid var(--border);
+}
+.insp-foot .spacer { flex: 1; }
+
+/* Importance left-stripe */
+.insp[data-importance="haute"]   { border-left: 4px solid var(--critical); }
+.insp[data-importance="moyenne"] { border-left: 4px solid var(--warning); }
+.insp[data-importance="basse"]   { border-left: 4px solid var(--border-strong); }
+
+/* ============================================================
+   Planning
+   ============================================================ */
+.day-col { display: flex; flex-direction: column; gap: 10px; }
+.day-head {
+  display: flex; align-items: baseline; gap: 8px;
+  padding-bottom: 8px; border-bottom: 2px solid var(--border);
+}
+.day-head .dnum { font-size: 18px; font-weight: 750; }
+.day-head .dname { color: var(--text-subdued); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.slot {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r); padding: 11px 12px;
+  box-shadow: var(--shadow-card);
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.slot-time {
+  font-weight: 700; font-size: 13px; color: var(--prune);
+  min-width: 44px;
+}
+.slot-body { flex: 1; min-width: 0; }
+.slot-title { font-weight: 600; font-size: 13.5px; }
+.slot-sub { color: var(--text-subdued); font-size: 12px; margin-top: 2px; }
+
+/* Liste planning */
+.plist { display: flex; flex-direction: column; gap: 0; }
+.plist .day-group + .day-group { margin-top: 8px; }
+.plist .pgrp-head {
+  position: sticky; top: 0;
+  background: var(--bg);
+  font-weight: 700; font-size: 13px; color: var(--text-subdued);
+  padding: 10px 4px 6px; text-transform: capitalize;
+}
+
+/* ============================================================
+   Connexions
+   ============================================================ */
+.conn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px;
+}
+.conn-logo {
+  width: 46px; height: 46px; border-radius: 12px;
+  display: grid; place-items: center; font-size: 22px; color: #fff; flex-shrink: 0;
+}
+.conn-logo.tiktok { background: #000; }
+.conn-logo.insta  { background: linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7); }
+.conn-logo.canva  { background: linear-gradient(135deg,#00c4cc,#7d2ae8); }
+.conn-info { flex: 1; min-width: 0; }
+.conn-info h3 { font-size: 15px; font-weight: 650; }
+.conn-info p { color: var(--text-subdued); font-size: 12.5px; margin-top: 2px; }
+
+/* ============================================================
+   Charte graphique
+   ============================================================ */
+.swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.swatch { border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); }
+.swatch .chip { height: 70px; }
+.swatch .meta { padding: 8px 10px; }
+.swatch .name { font-weight: 600; font-size: 12.5px; }
+.swatch .hex { color: var(--text-subdued); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+.type-row { display: flex; align-items: baseline; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.type-row:last-child { border-bottom: none; }
+
+/* ============================================================
+   Modale
+   ============================================================ */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(26,26,26,.45);
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 6vh 16px; z-index: 100;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  width: 100%; max-width: 560px;
+  box-shadow: var(--shadow-pop);
+  max-height: 88vh; display: flex; flex-direction: column;
+  animation: pop .18s ease;
+}
+@keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+.modal-head { display: flex; align-items: center; padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.modal-head h2 { font-size: 16px; font-weight: 700; }
+.modal-head .spacer { flex: 1; }
+.modal-body { padding: 18px; overflow-y: auto; }
+.modal-foot { display: flex; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--border); }
+.modal-foot .spacer { flex: 1; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #1a1a1a; color: #fff;
+  padding: 11px 18px; border-radius: var(--r-pill);
+  font-size: 13.5px; font-weight: 600;
+  box-shadow: var(--shadow-pop);
+  opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 200;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Empty state */
+.empty {
+  text-align: center; padding: 48px 20px; color: var(--text-subdued);
+}
+.empty .ico { font-size: 40px; margin-bottom: 10px; }
+.empty h3 { font-size: 16px; color: var(--text); margin-bottom: 4px; }
+
+.muted { color: var(--text-subdued); }
+.mt-8 { margin-top: 8px; } .mt-16 { margin-top: 16px; } .mt-24 { margin-top: 24px; }
+.mb-16 { margin-bottom: 16px; }
+.flex { display: flex; } .items-center { align-items: center; } .gap-8 { gap: 8px; } .gap-12 { gap: 12px; }
+.spacer { flex: 1; }
+
+/* Bottom nav (mobile / iOS) */
+.bottom-nav { display: none; }
+
+/* ============================================================
+   Responsive — bascule en mode iOS (barre du bas)
+   ============================================================ */
+@media (max-width: 860px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--topbar-h) 1fr auto;
+    grid-template-areas: "topbar" "main" "bottomnav";
+  }
+  .sidebar { display: none; }
+  .search { display: none; }
+  .lib-grid, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .swatches { grid-template-columns: repeat(2, 1fr); }
+  .main { padding: 16px; }
+
+  .bottom-nav {
+    grid-area: bottomnav;
+    display: flex;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-top: 1px solid var(--border);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  }
+  .bottom-nav button {
+    flex: 1; border: none; background: transparent;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 4px; color: var(--text-subdued); font-size: 10.5px; font-weight: 600;
+  }
+  .bottom-nav button .ico { font-size: 21px; }
+  .bottom-nav button.active { color: var(--prune); }
+}
+
+@media (max-width: 520px) {
+  .row { flex-direction: column; }
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">L</div>
+      <div>
+        <div class="brand-name">AdPilot</div>
+        <div class="brand-sub">Studio Ladylko</div>
+      </div>
+    </div>
+
+    <button class="nav-item active" data-nav="dashboard"><span class="ico">⌂</span> Accueil</button>
+    <button class="nav-item" data-nav="library"><span class="ico">▦</span> Bibliothèque <span class="badge-count" data-count="library">0</span></button>
+    <button class="nav-item" data-nav="planning"><span class="ico">▤</span> Planning</button>
+    <button class="nav-item" data-nav="create"><span class="ico">＋</span> Créer un post</button>
+
+    <div class="nav-section-label">Comptes</div>
+    <button class="nav-item" data-nav="connections"><span class="ico">⇄</span> Connexions</button>
+    <button class="nav-item" data-nav="brand"><span class="ico">✦</span> Charte &amp; Canva</button>
+
+    <div class="sidebar-footer">
+      <button class="nav-item" data-nav="help"><span class="ico">?</span> Guide rapide</button>
+    </div>
+  </aside>
+
+  <!-- ===================== TOPBAR ===================== -->
+  <header class="topbar">
+    <h1 id="topTitle">Accueil</h1>
+    <div class="spacer"></div>
+    <label class="search">
+      <span>⌕</span>
+      <input id="globalSearch" type="search" placeholder="Rechercher une inspiration, un post…">
+    </label>
+    <button class="icon-btn" title="Notifications">◔</button>
+    <div class="avatar" title="Équipe Ladylko">LK</div>
+  </header>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main">
+
+    <!-- ---------- ACCUEIL ---------- -->
+    <section class="section active" id="dashboard">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Bonjour 👋</div>
+            <div class="page-sub">Voici l'état de vos publications cette semaine.</div>
+          </div>
+          <div class="spacer"></div>
+          <button class="btn btn-primary" data-nav="create">＋ Nouveau post</button>
+        </div>
+
+        <div class="grid grid-4 mb-16" id="statTiles"></div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-head"><h3>Prochaines publications</h3><div class="spacer"></div>
+              <button class="btn btn-sm" data-nav="planning">Voir le planning</button>
+            </div>
+            <div id="upcoming" class="card-pad"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Raccourcis</h3></div>
+            <div class="card-pad grid" style="gap:10px">
+              <a class="btn btn-block" href="https://www.tiktok.com/upload" target="_blank" rel="noopener">▶ Poster sur TikTok</a>
+              <a class="btn btn-block" href="https://business.facebook.com/latest/composer" target="_blank" rel="noopener">◎ Poster / programmer sur Instagram</a>
+              <a class="btn btn-block" href="https://www.canva.com/" target="_blank" rel="noopener">✦ Ouvrir Canva</a>
+              <button class="btn btn-block" data-nav="library">▦ Ouvrir la bibliothèque</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- BIBLIOTHÈQUE ---------- -->
+    <section class="section" id="library">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Bibliothèque d'inspirations</div>
+            <div class="page-sub">Toutes vos idées, prêtes à devenir du contenu — avec l'ordre, l'heure et la méthode de post.</div>
+          </div>
+          <div class="spacer"></div>
+          <button class="btn btn-primary" id="addInspBtn">＋ Ajouter une inspiration</button>
+        </div>
+
+        <div class="flex items-center gap-12 mb-16" style="flex-wrap:wrap">
+          <div class="segmented" id="libFilterPlatform">
+            <button class="active" data-f="all">Tout</button>
+            <button data-f="tiktok">TikTok</button>
+            <button data-f="instagram">Instagram</button>
+          </div>
+          <div class="segmented" id="libFilterStatus">
+            <button class="active" data-s="all">Tous statuts</button>
+            <button data-s="idée">Idées</button>
+            <button data-s="brouillon">Brouillons</button>
+            <button data-s="prêt">Prêts</button>
+            <button data-s="publié">Publiés</button>
+          </div>
+          <div class="spacer"></div>
+          <div class="segmented" id="libSort">
+            <button class="active" data-o="order">Ordre de post</button>
+            <button data-o="importance">Importance</button>
+            <button data-o="date">Date</button>
+          </div>
+        </div>
+
+        <div class="lib-grid" id="libGrid"></div>
+        <div class="empty" id="libEmpty" style="display:none">
+          <div class="ico">▦</div>
+          <h3>Aucune inspiration pour le moment</h3>
+          <p>Ajoutez votre première idée pour commencer à construire vos publications.</p>
+          <button class="btn btn-primary mt-16" id="addInspBtn2">＋ Ajouter une inspiration</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PLANNING ---------- -->
+    <section class="section" id="planning">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Planning des posts</div>
+            <div class="page-sub">Quel contenu, quel jour, à quelle heure — et avec quelle priorité.</div>
+          </div>
+          <div class="spacer"></div>
+          <div class="segmented" id="planView">
+            <button class="active" data-v="list">Liste</button>
+            <button data-v="week">Semaine</button>
+          </div>
+        </div>
+        <div id="planList"></div>
+        <div id="planWeek" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- ---------- CRÉER ---------- (formulaire injecté par JS) -->
+    <section class="section" id="create">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Créer un post</div>
+            <div class="page-sub">Préparez tout ici, puis envoyez en un clic vers TikTok ou Instagram.</div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card card-pad" id="createForm"></div>
+          <div class="card card-pad" id="createPreview"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- CONNEXIONS ---------- -->
+    <section class="section" id="connections">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Connexions</div>
+            <div class="page-sub">Reliez vos comptes pour tout piloter depuis un seul endroit.</div>
+          </div>
+        </div>
+
+        <div class="card mb-16" style="background:var(--info-bg);border-color:#cfe0f5">
+          <div class="card-pad" style="display:flex;gap:12px">
+            <div style="font-size:20px">ⓘ</div>
+            <div>
+              <strong>À savoir avant de connecter</strong>
+              <p class="muted mt-8" style="font-size:13px;line-height:1.5">
+                Ces connexions ont besoin d'un petit serveur sécurisé (back-end) pour fonctionner réellement, ainsi
+                que des accès développeur officiels TikTok / Meta / Canva. Tant que ce n'est pas branché, les boutons
+                ci-dessous expliquent ce qui sera possible. <strong>Important :</strong> TikTok ne permet pas de
+                <em>lire</em> les brouillons faits dans l'app — en revanche AdPilot pourra <em>envoyer</em> vos posts
+                vers TikTok comme brouillons, et récupérer vos statistiques Instagram.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" id="connList" style="gap:12px"></div>
+      </div>
+    </section>
+
+    <!-- ---------- CHARTE & CANVA ---------- -->
+    <section class="section" id="brand">
+      <div class="page">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Charte graphique &amp; Canva</div>
+            <div class="page-sub">Vos couleurs, vos typos et vos modèles Canva, accessibles en un clic.</div>
+          </div>
+        </div>
+
+        <div class="card mb-16">
+          <div class="card-head"><h3>Palette de couleurs</h3></div>
+          <div class="card-pad">
+            <div class="swatches" id="paletteGrid"></div>
+          </div>
+        </div>
+
+        <div class="card mb-16">
+          <div class="card-head"><h3>Typographies</h3></div>
+          <div class="card-pad">
+            <div class="type-row">
+              <div style="font-family:'DM Serif Display',Georgia,serif;font-size:30px">Ladylko</div>
+              <div><strong>Titres</strong><div class="muted" style="font-size:12.5px">DM Serif Display</div></div>
+            </div>
+            <div class="type-row">
+              <div style="font-size:22px;font-weight:600">Le confort qui change tout</div>
+              <div><strong>Corps</strong><div class="muted" style="font-size:12.5px">Inter</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Modèles Canva</h3><div class="spacer"></div>
+            <button class="btn btn-primary btn-sm" id="addCanvaBtn">＋ Ajouter un lien Canva</button>
+          </div>
+          <div class="card-pad">
+            <p class="muted mb-16" style="font-size:13px">
+              Collez ici le lien de partage de vos designs Canva Pro. Pas d'extension, juste des liens simples pour
+              prévisualiser et ouvrir l'édition.
+            </p>
+            <div class="grid grid-3" id="canvaGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- GUIDE ---------- -->
+    <section class="section" id="help">
+      <div class="page">
+        <div class="page-head"><div>
+          <div class="page-title">Guide rapide</div>
+          <div class="page-sub">3 étapes pour publier comme une pro.</div>
+        </div></div>
+        <div class="grid grid-3">
+          <div class="card card-pad"><div style="font-size:26px">①</div><h3 class="mt-8">Mettre l'inspiration</h3><p class="muted mt-8" style="font-size:13px">Dans la Bibliothèque, ajoutez une idée : image/lien, plateforme, et la légende.</p></div>
+          <div class="card card-pad"><div style="font-size:26px">②</div><h3 class="mt-8">Choisir quand &amp; comment</h3><p class="muted mt-8" style="font-size:13px">Réglez le jour, l'heure, l'importance et la méthode de post. AdPilot range tout dans le Planning.</p></div>
+          <div class="card card-pad"><div style="font-size:26px">③</div><h3 class="mt-8">Publier en un clic</h3><p class="muted mt-8" style="font-size:13px">Le jour J, ouvrez le post et utilisez le raccourci TikTok/Instagram. Marquez-le « publié » et gardez le lien.</p></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== BOTTOM NAV (mobile/iOS) ===================== -->
+  <nav class="bottom-nav">
+    <button class="active" data-nav="dashboard"><span class="ico">⌂</span> Accueil</button>
+    <button data-nav="library"><span class="ico">▦</span> Biblio</button>
+    <button data-nav="create"><span class="ico">＋</span> Créer</button>
+    <button data-nav="planning"><span class="ico">▤</span> Planning</button>
+    <button data-nav="brand"><span class="ico">✦</span> Charte</button>
+  </nav>
+</div>
+
+<!-- Modale générique -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-head"><h2 id="modalTitle">Titre</h2><div class="spacer"></div>
+      <button class="icon-btn" id="modalClose">✕</button></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   AdPilot — Studio marketing Ladylko
+   Logique applicative (front-end, sauvegarde locale)
+   ============================================================ */
+(function () {
+  "use strict";
+
+  /* ---------- Constantes ---------- */
+  var PLATFORMS = {
+    tiktok:    { label: "TikTok",    icon: "▶", upload: "https://www.tiktok.com/upload" },
+    instagram: { label: "Instagram", icon: "◎", upload: "https://business.facebook.com/latest/composer" }
+  };
+  var IMPORTANCE = {
+    haute:   { label: "Haute",   badge: "badge-critical", emoji: "🔴" },
+    moyenne: { label: "Moyenne", badge: "badge-warning",  emoji: "🟠" },
+    basse:   { label: "Basse",   badge: "badge",          emoji: "⚪️" }
+  };
+  var STATUS = {
+    "idée":      { label: "Idée",      badge: "badge" },
+    "brouillon": { label: "Brouillon", badge: "badge-info" },
+    "prêt":      { label: "Prêt",      badge: "badge-prune" },
+    "publié":    { label: "Publié",    badge: "badge-success" }
+  };
+  var DAYS = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"];
+  var METHODS = [
+    "Vidéo native (filmée au téléphone)",
+    "Carrousel photo",
+    "Reels / vidéo montée",
+    "Story",
+    "Photo unique",
+    "Collaboration / duo"
+  ];
+
+  /* ---------- Stockage ---------- */
+  var KEY = "adpilot_ladylko_v1";
+  var DB = load();
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return seed();
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) {}
+  }
+  function uid() { return "x" + (DB._seq = (DB._seq || 0) + 1) + "_" + (new Date().getTime() % 100000); }
+
+  function seed() {
+    return {
+      _seq: 4,
+      inspirations: [
+        {
+          id: "x1", title: "Avant / après — le confort au quotidien", platform: "tiktok",
+          order: 1, importance: "haute", status: "prêt",
+          day: "lundi", time: "18:30", method: "Vidéo native (filmée au téléphone)",
+          caption: "POV : tu enfiles ton short Ladylko et tout change ✨ #confort #ladylko",
+          how: "Filmer en lumière naturelle, plan serré sur la matière, son tendance du moment.",
+          tags: ["lancement","confort"], canva: "", link: "", image: ""
+        },
+        {
+          id: "x2", title: "Témoignage client en story", platform: "instagram",
+          order: 2, importance: "moyenne", status: "brouillon",
+          day: "mardi", time: "12:00", method: "Story",
+          caption: "Elles l'ont adopté 💜 swipe pour voir leurs avis",
+          how: "Reposter un avis, ajouter un sticker question, lien vers la waitlist.",
+          tags: ["preuve sociale"], canva: "", link: "", image: ""
+        },
+        {
+          id: "x3", title: "Les coulisses de la fabrication", platform: "tiktok",
+          order: 3, importance: "basse", status: "idée",
+          day: "jeudi", time: "19:00", method: "Reels / vidéo montée",
+          caption: "Comment on a pensé chaque détail 🧵",
+          how: "Montage rapide, texte à l'écran, mettre en avant les matières.",
+          tags: ["coulisses"], canva: "", link: "", image: ""
+        }
+      ],
+      canva: [
+        { id: "c1", title: "Charte graphique 2026", url: "https://www.canva.com/" },
+        { id: "c2", title: "Template Story produit", url: "https://www.canva.com/" }
+      ],
+      connections: { tiktok: false, instagram: false, canva: false }
+    };
+  }
+
+  /* ---------- Helpers DOM ---------- */
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+  function dayIndex(d) { var i = DAYS.indexOf(d); return i < 0 ? 99 : i; }
+
+  /* ---------- Toast ---------- */
+  var toastT;
+  function toast(msg) {
+    var t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { t.classList.remove("show"); }, 2200);
+  }
+
+  /* ---------- Modale ---------- */
+  function openModal(title, bodyNode, footNodes) {
+    $("#modalTitle").textContent = title;
+    var body = $("#modalBody"); body.innerHTML = ""; body.appendChild(bodyNode);
+    var foot = $("#modalFoot"); foot.innerHTML = "";
+    (footNodes || []).forEach(function (n) { foot.appendChild(n); });
+    $("#modal").classList.add("open");
+  }
+  function closeModal() { $("#modal").classList.remove("open"); }
+  $("#modalClose").addEventListener("click", closeModal);
+  $("#modal").addEventListener("click", function (e) { if (e.target === this) closeModal(); });
+
+  function btn(label, cls, onClick) {
+    var b = el("button", "btn " + (cls || ""), label);
+    if (onClick) b.addEventListener("click", onClick);
+    return b;
+  }
+
+  /* ============================================================
+     Navigation
+     ============================================================ */
+  var TITLES = {
+    dashboard: "Accueil", library: "Bibliothèque", planning: "Planning",
+    create: "Créer un post", connections: "Connexions", brand: "Charte & Canva", help: "Guide rapide"
+  };
+  function go(name) {
+    $$(".section").forEach(function (s) { s.classList.toggle("active", s.id === name); });
+    $$("[data-nav]").forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-nav") === name); });
+    $("#topTitle").textContent = TITLES[name] || "AdPilot";
+    $(".main").scrollTop = 0;
+    if (name === "dashboard") renderDashboard();
+    if (name === "library") renderLibrary();
+    if (name === "planning") renderPlanning();
+    if (name === "create") renderCreate();
+    if (name === "connections") renderConnections();
+    if (name === "brand") renderBrand();
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-nav]");
+    if (t) { e.preventDefault(); go(t.getAttribute("data-nav")); }
+  });
+
+  function updateCounts() {
+    $$("[data-count='library']").forEach(function (n) { n.textContent = DB.inspirations.length; });
+  }
+
+  /* ============================================================
+     ACCUEIL
+     ============================================================ */
+  function renderDashboard() {
+    var total = DB.inspirations.length;
+    var ready = DB.inspirations.filter(function (i) { return i.status === "prêt"; }).length;
+    var published = DB.inspirations.filter(function (i) { return i.status === "publié"; }).length;
+    var high = DB.inspirations.filter(function (i) { return i.importance === "haute" && i.status !== "publié"; }).length;
+
+    var tiles = [
+      { label: "Inspirations", value: total, delta: "Dans la bibliothèque", cls: "" },
+      { label: "Prêtes à publier", value: ready, delta: "À programmer", cls: "" },
+      { label: "Publiées", value: published, delta: "Bravo 🎉", cls: "up" },
+      { label: "Priorité haute", value: high, delta: "À ne pas rater", cls: high ? "down" : "" }
+    ];
+    var tg = $("#statTiles"); tg.innerHTML = "";
+    tiles.forEach(function (t) {
+      tg.appendChild(el("div", "stat",
+        '<div class="label">' + t.label + '</div>' +
+        '<div class="value">' + t.value + '</div>' +
+        '<div class="delta ' + t.cls + '">' + t.delta + '</div>'));
+    });
+
+    var up = DB.inspirations
+      .filter(function (i) { return i.status !== "publié"; })
+      .sort(sortByPlanning)
+      .slice(0, 5);
+    var box = $("#upcoming"); box.innerHTML = "";
+    if (!up.length) {
+      box.appendChild(el("div", "muted", "Rien de programmé. Ajoutez une inspiration pour commencer."));
+    } else {
+      up.forEach(function (i) {
+        var row = el("div", "slot");
+        row.style.marginBottom = "10px";
+        row.innerHTML =
+          '<div class="slot-time">' + esc(i.time || "--:--") + '</div>' +
+          '<div class="slot-body">' +
+            '<div class="slot-title">' + esc(i.title) + '</div>' +
+            '<div class="slot-sub">' + PLATFORMS[i.platform].icon + " " + PLATFORMS[i.platform].label +
+              " · " + cap(i.day || "à planifier") + '</div>' +
+          '</div>' +
+          '<span class="badge ' + IMPORTANCE[i.importance].badge + '">' + IMPORTANCE[i.importance].label + '</span>';
+        box.appendChild(row);
+      });
+    }
+    updateCounts();
+  }
+  function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+
+  function sortByPlanning(a, b) {
+    var d = dayIndex(a.day) - dayIndex(b.day);
+    if (d !== 0) return d;
+    return String(a.time || "99").localeCompare(String(b.time || "99"));
+  }
+
+  /* ============================================================
+     BIBLIOTHÈQUE
+     ============================================================ */
+  var libState = { platform: "all", status: "all", sort: "order", q: "" };
+
+  function renderLibrary() {
+    var items = DB.inspirations.slice();
+    if (libState.platform !== "all") items = items.filter(function (i) { return i.platform === libState.platform; });
+    if (libState.status !== "all") items = items.filter(function (i) { return i.status === libState.status; });
+    if (libState.q) {
+      var q = libState.q.toLowerCase();
+      items = items.filter(function (i) {
+        return (i.title + " " + i.caption + " " + (i.tags || []).join(" ")).toLowerCase().indexOf(q) >= 0;
+      });
+    }
+    if (libState.sort === "order") items.sort(function (a, b) { return (a.order || 99) - (b.order || 99); });
+    else if (libState.sort === "importance") {
+      var rank = { haute: 0, moyenne: 1, basse: 2 };
+      items.sort(function (a, b) { return rank[a.importance] - rank[b.importance]; });
+    } else items.sort(sortByPlanning);
+
+    var grid = $("#libGrid"); grid.innerHTML = "";
+    $("#libEmpty").style.display = items.length ? "none" : "block";
+    grid.style.display = items.length ? "grid" : "none";
+
+    items.forEach(function (i) {
+      var c = el("div", "insp");
+      c.setAttribute("data-importance", i.importance);
+      var media = i.image
+        ? '<img src="' + esc(i.image) + '" alt="">'
+        : '<span>▦</span>';
+      c.innerHTML =
+        '<div class="insp-media">' + media +
+          '<div class="insp-order" title="Ordre de post">' + (i.order || "·") + '</div>' +
+          '<div class="insp-platform" title="' + PLATFORMS[i.platform].label + '">' + PLATFORMS[i.platform].icon + '</div>' +
+        '</div>' +
+        '<div class="insp-body">' +
+          '<div class="insp-title">' + esc(i.title) + '</div>' +
+          '<div class="insp-meta">' +
+            '<span class="badge ' + STATUS[i.status].badge + '">' + STATUS[i.status].label + '</span>' +
+            '<span class="badge ' + IMPORTANCE[i.importance].badge + '">' + IMPORTANCE[i.importance].emoji + " " + IMPORTANCE[i.importance].label + '</span>' +
+          '</div>' +
+          '<div class="insp-when">🗓 ' + cap(i.day || "à planifier") + ' · ⏰ ' + esc(i.time || "--:--") + '</div>' +
+          (i.method ? '<div class="insp-when">🎬 ' + esc(i.method) + '</div>' : '') +
+          ((i.tags && i.tags.length) ? '<div class="insp-meta">' + i.tags.map(function (t) { return '<span class="tag">#' + esc(t) + '</span>'; }).join("") + '</div>' : '') +
+        '</div>' +
+        '<div class="insp-foot">' +
+          '<button class="btn btn-sm" data-edit="' + i.id + '">Ouvrir</button>' +
+          '<div class="spacer"></div>' +
+          '<a class="btn btn-sm" href="' + PLATFORMS[i.platform].upload + '" target="_blank" rel="noopener">Poster ↗</a>' +
+        '</div>';
+      grid.appendChild(c);
+    });
+
+    $$("[data-edit]", grid).forEach(function (b) {
+      b.addEventListener("click", function () { editInspiration(b.getAttribute("data-edit")); });
+    });
+    updateCounts();
+  }
+
+  /* ---- Formulaire inspiration (création / édition) ---- */
+  function inspirationForm(i) {
+    i = i || {};
+    var wrap = el("div");
+    wrap.innerHTML =
+      field("Titre de l'idée", '<input class="input" id="f_title" value="' + esc(i.title || "") + '" placeholder="Ex : Avant / après confort">') +
+      '<div class="row">' +
+        field("Plateforme", select("f_platform", Object.keys(PLATFORMS).map(function (k) {
+          return [k, PLATFORMS[k].label]; }), i.platform || "tiktok")) +
+        field("Statut", select("f_status", Object.keys(STATUS).map(function (k) {
+          return [k, STATUS[k].label]; }), i.status || "idée")) +
+      '</div>' +
+      '<div class="row">' +
+        field("Ordre de post", '<input class="input" id="f_order" type="number" min="1" value="' + esc(i.order || "") + '" placeholder="1">', "Le n° de passage dans votre file.") +
+        field("Importance", select("f_importance", Object.keys(IMPORTANCE).map(function (k) {
+          return [k, IMPORTANCE[k].label]; }), i.importance || "moyenne")) +
+      '</div>' +
+      '<div class="row">' +
+        field("Jour de post", select("f_day", [["", "À planifier"]].concat(DAYS.map(function (d) { return [d, cap(d)]; })), i.day || "")) +
+        field("Heure de post", '<input class="input" id="f_time" type="time" value="' + esc(i.time || "") + '">') +
+      '</div>' +
+      field("Comment poster (méthode)", select("f_method", [["", "—"]].concat(METHODS.map(function (m) { return [m, m]; })), i.method || "")) +
+      field("Légende / texte du post", '<textarea class="textarea" id="f_caption" placeholder="La légende à publier…">' + esc(i.caption || "") + '</textarea>') +
+      field("Instructions de tournage / réalisation", '<textarea class="textarea" id="f_how" placeholder="Comment filmer, le son, les plans, l\'angle…">' + esc(i.how || "") + '</textarea>') +
+      '<div class="row">' +
+        field("Lien image / référence", '<input class="input" id="f_image" value="' + esc(i.image || "") + '" placeholder="https://…">') +
+        field("Lien Canva associé", '<input class="input" id="f_canva" value="' + esc(i.canva || "") + '" placeholder="https://canva.com/…">') +
+      '</div>' +
+      field("Tags (séparés par des virgules)", '<input class="input" id="f_tags" value="' + esc((i.tags || []).join(", ")) + '" placeholder="confort, lancement">');
+    return wrap;
+  }
+  function field(label, inner, hint) {
+    return '<div class="field"><label>' + label + '</label>' + inner +
+      (hint ? '<div class="hint">' + hint + '</div>' : '') + '</div>';
+  }
+  function select(id, opts, val) {
+    return '<select class="select" id="' + id + '">' + opts.map(function (o) {
+      return '<option value="' + esc(o[0]) + '"' + (o[0] === val ? " selected" : "") + '>' + esc(o[1]) + '</option>';
+    }).join("") + '</select>';
+  }
+  function readInspiration(node) {
+    function v(id) { var n = $("#" + id, node); return n ? n.value.trim() : ""; }
+    return {
+      title: v("f_title") || "Sans titre",
+      platform: v("f_platform"), status: v("f_status"),
+      order: parseInt(v("f_order"), 10) || null,
+      importance: v("f_importance"),
+      day: v("f_day"), time: v("f_time"), method: v("f_method"),
+      caption: v("f_caption"), how: v("f_how"),
+      image: v("f_image"), canva: v("f_canva"),
+      tags: v("f_tags").split(",").map(function (s) { return s.trim(); }).filter(Boolean)
+    };
+  }
+
+  function addInspiration() {
+    var form = inspirationForm({});
+    openModal("Nouvelle inspiration", form, [
+      btn("Annuler", "", closeModal),
+      (function () { var s = el("div", "spacer"); return s; })(),
+      btn("Ajouter", "btn-primary", function () {
+        var data = readInspiration(form);
+        data.id = uid();
+        DB.inspirations.push(data); save();
+        closeModal(); toast("Inspiration ajoutée ✓");
+        renderLibrary(); renderDashboard();
+      })
+    ]);
+  }
+  function editInspiration(id) {
+    var i = DB.inspirations.filter(function (x) { return x.id === id; })[0];
+    if (!i) return;
+    var form = inspirationForm(i);
+    openModal("Modifier l'inspiration", form, [
+      btn("Supprimer", "btn-danger", function () {
+        if (confirm("Supprimer cette inspiration ?")) {
+          DB.inspirations = DB.inspirations.filter(function (x) { return x.id !== id; });
+          save(); closeModal(); toast("Supprimée"); renderLibrary(); renderDashboard();
+        }
+      }),
+      el("div", "spacer"),
+      btn("Annuler", "", closeModal),
+      btn("Enregistrer", "btn-primary", function () {
+        var data = readInspiration(form); data.id = id;
+        var idx = DB.inspirations.findIndex(function (x) { return x.id === id; });
+        DB.inspirations[idx] = data; save();
+        closeModal(); toast("Enregistré ✓"); renderLibrary(); renderDashboard();
+      })
+    ]);
+  }
+
+  /* ============================================================
+     PLANNING
+     ============================================================ */
+  var planView = "list";
+  function renderPlanning() {
+    if (planView === "list") {
+      $("#planList").style.display = "block"; $("#planWeek").style.display = "none";
+      renderPlanList();
+    } else {
+      $("#planList").style.display = "none"; $("#planWeek").style.display = "grid";
+      renderPlanWeek();
+    }
+  }
+  function renderPlanList() {
+    var box = $("#planList"); box.className = "plist"; box.innerHTML = "";
+    var byDay = {};
+    DB.inspirations.forEach(function (i) {
+      var d = i.day || "À planifier";
+      (byDay[d] = byDay[d] || []).push(i);
+    });
+    var order = DAYS.concat(["À planifier"]);
+    var any = false;
+    order.forEach(function (d) {
+      var list = byDay[d]; if (!list || !list.length) return;
+      any = true;
+      list.sort(function (a, b) { return String(a.time || "99").localeCompare(String(b.time || "99")); });
+      var grp = el("div", "day-group");
+      grp.appendChild(el("div", "pgrp-head", cap(d) + " · " + list.length + " post" + (list.length > 1 ? "s" : "")));
+      list.forEach(function (i) {
+        var slot = el("div", "slot");
+        slot.style.marginBottom = "8px";
+        slot.innerHTML =
+          '<div class="slot-time">' + esc(i.time || "--:--") + '</div>' +
+          '<div class="slot-body">' +
+            '<div class="slot-title">' + PLATFORMS[i.platform].icon + " " + esc(i.title) + '</div>' +
+            '<div class="slot-sub">' + esc(i.method || "Méthode à définir") + (i.order ? " · ordre #" + i.order : "") + '</div>' +
+          '</div>' +
+          '<span class="badge ' + IMPORTANCE[i.importance].badge + '">' + IMPORTANCE[i.importance].label + '</span> ' +
+          '<span class="badge ' + STATUS[i.status].badge + '">' + STATUS[i.status].label + '</span>';
+        slot.addEventListener("click", function () { editInspiration(i.id); });
+        slot.style.cursor = "pointer";
+        grp.appendChild(slot);
+      });
+      box.appendChild(grp);
+    });
+    if (!any) box.innerHTML = '<div class="empty"><div class="ico">▤</div><h3>Planning vide</h3><p>Ajoutez un jour et une heure à vos inspirations pour les voir ici.</p></div>';
+  }
+  function renderPlanWeek() {
+    var box = $("#planWeek");
+    box.className = "grid";
+    box.style.gridTemplateColumns = "repeat(7, 1fr)";
+    box.innerHTML = "";
+    DAYS.forEach(function (d, idx) {
+      var col = el("div", "day-col");
+      col.innerHTML = '<div class="day-head"><span class="dnum">' + (idx + 1) + '</span><span class="dname">' + d.slice(0, 3) + '</span></div>';
+      DB.inspirations.filter(function (i) { return i.day === d; })
+        .sort(function (a, b) { return String(a.time || "99").localeCompare(String(b.time || "99")); })
+        .forEach(function (i) {
+          var s = el("div", "slot");
+          s.style.flexDirection = "column";
+          s.innerHTML = '<div class="slot-time">' + esc(i.time || "--:--") + '</div>' +
+            '<div class="slot-title" style="font-size:12px">' + PLATFORMS[i.platform].icon + " " + esc(i.title) + '</div>';
+          s.style.cursor = "pointer";
+          s.addEventListener("click", function () { editInspiration(i.id); });
+          col.appendChild(s);
+        });
+      box.appendChild(col);
+    });
+  }
+
+  /* ============================================================
+     CRÉER UN POST
+     ============================================================ */
+  function renderCreate() {
+    var form = inspirationForm({ status: "brouillon" });
+    var host = $("#createForm");
+    host.innerHTML = '<h3 style="margin-bottom:14px">Détails du post</h3>';
+    host.appendChild(form);
+    var actions = el("div", "flex gap-12 mt-16");
+    actions.appendChild(btn("Enregistrer dans la bibliothèque", "btn-primary", function () {
+      var data = readInspiration(form); data.id = uid();
+      DB.inspirations.push(data); save();
+      toast("Post enregistré ✓"); go("library");
+    }));
+    host.appendChild(actions);
+
+    // Aperçu live
+    var prev = $("#createPreview");
+    prev.innerHTML = '<h3 style="margin-bottom:14px">Aperçu &amp; envoi</h3>';
+    var card = el("div");
+    prev.appendChild(card);
+    function refresh() {
+      var d = readInspiration(form);
+      card.innerHTML =
+        '<div class="insp" style="max-width:280px;margin:0 auto" data-importance="' + d.importance + '">' +
+          '<div class="insp-media">' + (d.image ? '<img src="' + esc(d.image) + '">' : '<span>▦</span>') +
+            '<div class="insp-platform">' + PLATFORMS[d.platform].icon + '</div></div>' +
+          '<div class="insp-body">' +
+            '<div class="insp-title">' + esc(d.title || "Titre du post") + '</div>' +
+            '<div class="muted" style="font-size:12.5px">' + esc(d.caption || "La légende apparaîtra ici…") + '</div>' +
+            '<div class="insp-when">🗓 ' + cap(d.day || "à planifier") + ' · ⏰ ' + esc(d.time || "--:--") + '</div>' +
+          '</div></div>' +
+        '<div class="mt-16 grid" style="gap:8px">' +
+          '<a class="btn btn-block btn-primary" href="' + PLATFORMS[d.platform].upload + '" target="_blank" rel="noopener">' +
+            PLATFORMS[d.platform].icon + ' Ouvrir ' + PLATFORMS[d.platform].label + ' pour poster ↗</a>' +
+          '<button class="btn btn-block" id="copyCap">⧉ Copier la légende</button>' +
+          (d.canva ? '<a class="btn btn-block" href="' + esc(d.canva) + '" target="_blank" rel="noopener">✦ Ouvrir le visuel Canva ↗</a>' : '') +
+        '</div>';
+      var cc = $("#copyCap", card);
+      if (cc) cc.addEventListener("click", function () {
+        copy(d.caption || ""); toast("Légende copiée ✓");
+      });
+    }
+    form.addEventListener("input", refresh);
+    form.addEventListener("change", refresh);
+    refresh();
+  }
+  function copy(text) {
+    try {
+      navigator.clipboard.writeText(text);
+    } catch (e) {
+      var ta = el("textarea"); ta.value = text; document.body.appendChild(ta);
+      ta.select(); try { document.execCommand("copy"); } catch (e2) {} document.body.removeChild(ta);
+    }
+  }
+
+  /* ============================================================
+     CONNEXIONS
+     ============================================================ */
+  var CONN_META = {
+    tiktok: {
+      name: "TikTok", logo: "tiktok", icon: "♪",
+      desc: "Envoyer vos posts comme brouillons et récupérer les liens publiés.",
+      can: ["Envoyer un post vers TikTok comme brouillon", "Récupérer le lien d'une vidéo publiée", "Voir le nombre de vues / likes (compte Business)"],
+      cannot: ["Lire les brouillons créés directement dans l'app TikTok (non autorisé par TikTok)"]
+    },
+    instagram: {
+      name: "Instagram", logo: "insta", icon: "◎",
+      desc: "Programmer des posts et voir les statistiques de votre compte.",
+      can: ["Publier / programmer un post ou un Reel", "Voir les statistiques (vues, portée, abonnés)", "Récupérer le lien des publications"],
+      cannot: ["Lire les brouillons « non publiés » de l'app (non exposés par Instagram)"]
+    },
+    canva: {
+      name: "Canva Pro", logo: "canva", icon: "✦",
+      desc: "Afficher vos modèles et ouvrir l'édition d'un simple clic.",
+      can: ["Lister vos designs et modèles", "Afficher un aperçu", "Ouvrir l'édition dans Canva (lien direct, sans extension)"],
+      cannot: []
+    }
+  };
+  function renderConnections() {
+    var host = $("#connList"); host.innerHTML = "";
+    Object.keys(CONN_META).forEach(function (k) {
+      var m = CONN_META[k];
+      var connected = DB.connections[k];
+      var card = el("div", "card");
+      card.innerHTML =
+        '<div class="conn">' +
+          '<div class="conn-logo ' + m.logo + '">' + m.icon + '</div>' +
+          '<div class="conn-info"><h3>' + m.name + '</h3><p>' + m.desc + '</p></div>' +
+          '<span class="badge ' + (connected ? "badge-success dot" : "badge dot") + '">' + (connected ? "Connecté" : "Non connecté") + '</span>' +
+          '<button class="btn ' + (connected ? "btn-danger" : "btn-primary") + '" data-conn="' + k + '">' +
+            (connected ? "Déconnecter" : "Connecter") + '</button>' +
+        '</div>';
+      host.appendChild(card);
+    });
+    $$("[data-conn]", host).forEach(function (b) {
+      b.addEventListener("click", function () { connectFlow(b.getAttribute("data-conn")); });
+    });
+  }
+  function connectFlow(k) {
+    var m = CONN_META[k];
+    if (DB.connections[k]) {
+      DB.connections[k] = false; save(); toast(m.name + " déconnecté"); renderConnections(); return;
+    }
+    var body = el("div");
+    body.innerHTML =
+      '<p class="mb-16">Voici ce qu\'AdPilot pourra faire une fois <strong>' + m.name + '</strong> relié (après branchement du back-end) :</p>' +
+      '<div class="card" style="background:var(--success-bg);border-color:#bfe3d2"><div class="card-pad">' +
+        '<strong style="color:var(--success)">✓ Possible</strong><ul style="margin:8px 0 0 18px;font-size:13px">' +
+        m.can.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul></div></div>' +
+      (m.cannot.length ? '<div class="card mt-16" style="background:var(--critical-bg);border-color:#f3c9c2"><div class="card-pad">' +
+        '<strong style="color:var(--critical)">✕ Non possible</strong><ul style="margin:8px 0 0 18px;font-size:13px">' +
+        m.cannot.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul></div></div>' : '') +
+      '<p class="hint mt-16">Pour l\'instant, le bouton ci-dessous simule la connexion afin de tester l\'interface.</p>';
+    openModal("Connecter " + m.name, body, [
+      btn("Plus tard", "", closeModal),
+      el("div", "spacer"),
+      btn("Simuler la connexion", "btn-primary", function () {
+        DB.connections[k] = true; save(); closeModal(); toast(m.name + " connecté (simulation)"); renderConnections();
+      })
+    ]);
+  }
+
+  /* ============================================================
+     CHARTE & CANVA
+     ============================================================ */
+  var PALETTE = [
+    ["Prune", "#4F1B64"], ["Rose", "#F1B1B4"], ["Poudré", "#F2C4CD"],
+    ["Ivoire", "#FAF7F5"], ["Charbon", "#1A1A1A"]
+  ];
+  function renderBrand() {
+    var pg = $("#paletteGrid"); pg.innerHTML = "";
+    PALETTE.forEach(function (p) {
+      var s = el("div", "swatch");
+      s.innerHTML = '<div class="chip" style="background:' + p[1] + '"></div>' +
+        '<div class="meta"><div class="name">' + p[0] + '</div><div class="hex">' + p[1] + '</div></div>';
+      s.style.cursor = "pointer";
+      s.title = "Copier " + p[1];
+      s.addEventListener("click", function () { copy(p[1]); toast(p[1] + " copié ✓"); });
+      pg.appendChild(s);
+    });
+
+    var cg = $("#canvaGrid"); cg.innerHTML = "";
+    DB.canva.forEach(function (c) {
+      var card = el("div", "card");
+      card.innerHTML =
+        '<div style="height:110px;border-radius:14px 14px 0 0;background:linear-gradient(135deg,#00c4cc,#7d2ae8);display:grid;place-items:center;color:#fff;font-size:28px">✦</div>' +
+        '<div class="card-pad">' +
+          '<div style="font-weight:650;font-size:13.5px">' + esc(c.title) + '</div>' +
+          '<div class="flex gap-8 mt-8">' +
+            '<a class="btn btn-sm" href="' + esc(c.url) + '" target="_blank" rel="noopener">Ouvrir ↗</a>' +
+            '<button class="btn btn-sm" data-delc="' + c.id + '">Retirer</button>' +
+          '</div>' +
+        '</div>';
+      cg.appendChild(card);
+    });
+    $$("[data-delc]", cg).forEach(function (b) {
+      b.addEventListener("click", function () {
+        DB.canva = DB.canva.filter(function (x) { return x.id !== b.getAttribute("data-delc"); });
+        save(); renderBrand(); toast("Lien retiré");
+      });
+    });
+  }
+  function addCanva() {
+    var body = el("div");
+    body.innerHTML =
+      field("Nom du modèle", '<input class="input" id="cv_title" placeholder="Ex : Template Reels produit">') +
+      field("Lien de partage Canva", '<input class="input" id="cv_url" placeholder="https://www.canva.com/design/…">');
+    openModal("Ajouter un lien Canva", body, [
+      btn("Annuler", "", closeModal),
+      el("div", "spacer"),
+      btn("Ajouter", "btn-primary", function () {
+        var title = $("#cv_title", body).value.trim() || "Modèle Canva";
+        var url = $("#cv_url", body).value.trim() || "https://www.canva.com/";
+        DB.canva.push({ id: uid(), title: title, url: url }); save();
+        closeModal(); toast("Lien ajouté ✓"); renderBrand();
+      })
+    ]);
+  }
+
+  /* ============================================================
+     Écouteurs
+     ============================================================ */
+  $("#addInspBtn").addEventListener("click", addInspiration);
+  var addBtn2 = $("#addInspBtn2"); if (addBtn2) addBtn2.addEventListener("click", addInspiration);
+  $("#addCanvaBtn").addEventListener("click", addCanva);
+
+  $("#libFilterPlatform").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    libState.platform = b.getAttribute("data-f"); renderLibrary();
+  });
+  $("#libFilterStatus").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    libState.status = b.getAttribute("data-s"); renderLibrary();
+  });
+  $("#libSort").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    libState.sort = b.getAttribute("data-o"); renderLibrary();
+  });
+  $("#planView").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    $$("button", this).forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+    planView = b.getAttribute("data-v"); renderPlanning();
+  });
+  $("#globalSearch").addEventListener("input", function () {
+    libState.q = this.value;
+    if (!$("#library").classList.contains("active")) go("library");
+    else renderLibrary();
+  });
+
+  /* ---------- Démarrage ---------- */
+  updateCounts();
+  renderDashboard();
+})();
+
+</script>
+</body>
+</html>
