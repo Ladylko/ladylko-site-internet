@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Ladylko — Administration des données</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      background: var(--ivoire, #FAF7F5);
+      color: var(--charcoal, #1A1A1A);
+      margin: 0;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    h1 { font-family: var(--font-display, 'DM Serif Display', serif); color: var(--prune, #4F1B64); margin: 0 0 .25rem; }
+    .sub { color: #666; margin: 0 0 2rem; font-size: .9rem; }
+    .login {
+      background: #fff; border: 1px solid #eadfe6; border-radius: 16px;
+      padding: 1.5rem; max-width: 420px; box-shadow: 0 6px 24px rgba(79,27,100,.06);
+    }
+    label { display: block; font-size: .85rem; margin-bottom: .4rem; font-weight: 500; }
+    input {
+      width: 100%; padding: .75rem .9rem; border: 1px solid #ddd; border-radius: 10px;
+      font-size: .95rem; margin-bottom: 1rem;
+    }
+    button {
+      background: var(--prune, #4F1B64); color: #fff; border: none; border-radius: 999px;
+      padding: .7rem 1.5rem; font-size: .9rem; cursor: pointer; font-weight: 500;
+    }
+    button:disabled { opacity: .5; cursor: default; }
+    .row { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .btn-ghost { background: #fff; color: var(--prune, #4F1B64); border: 1px solid #d9c7d4; }
+    .stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .stat {
+      background: #fff; border: 1px solid #eadfe6; border-radius: 14px; padding: 1rem 1.25rem; min-width: 140px;
+    }
+    .stat b { display: block; font-size: 1.8rem; color: var(--prune, #4F1B64); font-family: var(--font-display, serif); }
+    .stat span { font-size: .8rem; color: #777; text-transform: uppercase; letter-spacing: .04em; }
+    section { margin-bottom: 2.5rem; }
+    section h2 { font-size: 1.1rem; color: var(--prune, #4F1B64); border-bottom: 2px solid #eadfe6; padding-bottom: .5rem; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: .85rem; }
+    th, td { text-align: left; padding: .65rem .8rem; border-bottom: 1px solid #f0e8ee; vertical-align: top; }
+    th { background: #f7f0f5; font-weight: 600; }
+    td.msg { max-width: 420px; white-space: pre-wrap; }
+    .empty { color: #999; font-style: italic; padding: 1rem 0; }
+    .error { color: #b00020; margin-top: .75rem; font-size: .85rem; }
+    .hidden { display: none !important; }
+    .tools { margin-left: auto; font-size: .85rem; }
+    a.csv { color: var(--prune, #4F1B64); cursor: pointer; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Ladylko — Données</h1>
+    <p class="sub">Soumissions enregistrées sur la plateforme (liste d'attente, contact, newsletter).</p>
+
+    <!-- Écran de connexion -->
+    <div id="login" class="login">
+      <label for="token">Jeton d'administration</label>
+      <input type="password" id="token" placeholder="ADMIN_TOKEN" autocomplete="off">
+      <button id="login-btn">Accéder aux données</button>
+      <div id="login-error" class="error hidden"></div>
+    </div>
+
+    <!-- Tableau de bord -->
+    <div id="dash" class="hidden">
+      <div class="row">
+        <button id="refresh">↻ Rafraîchir</button>
+        <button id="logout" class="btn-ghost">Se déconnecter</button>
+        <span class="tools" id="updated"></span>
+      </div>
+
+      <div class="stats" id="stats"></div>
+
+      <section>
+        <h2>Liste d'attente · <a class="csv" data-type="waitlist">exporter CSV</a></h2>
+        <div id="waitlist"></div>
+      </section>
+
+      <section>
+        <h2>Contact · <a class="csv" data-type="contact">exporter CSV</a></h2>
+        <div id="contact"></div>
+      </section>
+
+      <section>
+        <h2>Newsletter · <a class="csv" data-type="newsletter">exporter CSV</a></h2>
+        <div id="newsletter"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const KEY = 'ladylko_admin_token';
+    let DATA = { waitlist: [], contact: [], newsletter: [] };
+
+    const $ = (id) => document.getElementById(id);
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      try { return new Date(iso).toLocaleString('fr-FR'); } catch { return iso; }
+    }
+    function esc(s) {
+      return String(s ?? '').replace(/[&<>"]/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    }
+
+    function renderTable(containerId, rows, columns) {
+      const el = $(containerId);
+      if (!rows.length) { el.innerHTML = '<p class="empty">Aucune soumission pour le moment.</p>'; return; }
+      const head = columns.map((c) => `<th>${esc(c.label)}</th>`).join('');
+      const body = rows.map((r) => '<tr>' + columns.map((c) =>
+        `<td class="${c.key === 'message' ? 'msg' : ''}">${esc(c.fmt ? c.fmt(r[c.key]) : r[c.key])}</td>`
+      ).join('') + '</tr>').join('');
+      el.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+    }
+
+    function render() {
+      $('stats').innerHTML = [
+        ['Liste d\'attente', DATA.waitlist.length],
+        ['Contact', DATA.contact.length],
+        ['Newsletter', DATA.newsletter.length],
+      ].map(([l, n]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('');
+
+      renderTable('waitlist', DATA.waitlist, [
+        { key: 'date', label: 'Date', fmt: fmtDate },
+        { key: 'firstName', label: 'Prénom' },
+        { key: 'email', label: 'Email' },
+        { key: 'pain', label: 'Douleurs' },
+        { key: 'lang', label: 'Langue' },
+      ]);
+      renderTable('contact', DATA.contact, [
+        { key: 'date', label: 'Date', fmt: fmtDate },
+        { key: 'name', label: 'Nom' },
+        { key: 'email', label: 'Email' },
+        { key: 'subject', label: 'Sujet' },
+        { key: 'message', label: 'Message' },
+      ]);
+      renderTable('newsletter', DATA.newsletter, [
+        { key: 'date', label: 'Date', fmt: fmtDate },
+        { key: 'email', label: 'Email' },
+        { key: 'lang', label: 'Langue' },
+      ]);
+    }
+
+    function toCSV(rows) {
+      if (!rows.length) return '';
+      const cols = Object.keys(rows[0]);
+      const escape = (v) => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+      return [cols.join(','), ...rows.map((r) => cols.map((c) => escape(r[c])).join(','))].join('\n');
+    }
+
+    function download(type) {
+      const csv = toCSV(DATA[type]);
+      if (!csv) return;
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `ladylko-${type}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    async function load() {
+      const token = sessionStorage.getItem(KEY);
+      if (!token) return showLogin();
+      try {
+        const res = await fetch('/api/submissions?type=all', {
+          headers: { Authorization: 'Bearer ' + token },
+        });
+        if (res.status === 401) { sessionStorage.removeItem(KEY); return showLogin('Jeton invalide.'); }
+        if (!res.ok) {
+          const d = await res.json().catch(() => ({}));
+          return showLogin(d.error || 'Erreur (' + res.status + ').');
+        }
+        const json = await res.json();
+        DATA = { waitlist: json.waitlist || [], contact: json.contact || [], newsletter: json.newsletter || [] };
+        $('login').classList.add('hidden');
+        $('dash').classList.remove('hidden');
+        $('updated').textContent = 'Mis à jour : ' + new Date().toLocaleTimeString('fr-FR');
+        render();
+      } catch (e) {
+        showLogin('Erreur réseau.');
+      }
+    }
+
+    function showLogin(msg) {
+      $('dash').classList.add('hidden');
+      $('login').classList.remove('hidden');
+      const err = $('login-error');
+      if (msg) { err.textContent = msg; err.classList.remove('hidden'); }
+      else err.classList.add('hidden');
+    }
+
+    $('login-btn').addEventListener('click', () => {
+      const t = $('token').value.trim();
+      if (!t) return;
+      sessionStorage.setItem(KEY, t);
+      load();
+    });
+    $('token').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('login-btn').click(); });
+    $('refresh').addEventListener('click', load);
+    $('logout').addEventListener('click', () => { sessionStorage.removeItem(KEY); showLogin(); });
+    document.querySelectorAll('a.csv').forEach((a) =>
+      a.addEventListener('click', () => download(a.dataset.type)));
+
+    load();
+  </script>
+</body>
+</html>

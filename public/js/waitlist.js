@@ -113,25 +113,42 @@ function initWaitlistForm() {
     // Submit btn loading state
     const submitBtn  = document.getElementById('wl-submit');
     const submitText = document.getElementById('wl-submit-text');
+    const originalText = submitText.textContent;
     submitBtn.disabled = true;
     submitText.textContent = '...';
 
-    // Simulate submission (replace with real API call: Mailchimp, Brevo, etc.)
-    setTimeout(() => {
-      // Store locally for now
-      const entry = {
-        firstName: firstName.value.trim(),
-        email:     email.value.trim(),
-        pain:      selectedPain,
-        date:      new Date().toISOString()
-      };
-      console.log('Waitlist entry:', entry);
-      // TODO: POST to your mailing service (Brevo, Mailchimp, etc.)
+    const entry = {
+      firstName: firstName.value.trim(),
+      email:     email.value.trim(),
+      pain:      selectedPain,
+      lang:      localStorage.getItem('ladylko_lang') || 'fr'
+    };
 
-      // Show success
-      document.getElementById('wl-form-card').style.display = 'none';
-      document.getElementById('wl-success').style.display   = 'block';
-    }, 900);
+    // Enregistrement sur la plateforme (Vercel — /api/waitlist)
+    fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || 'Erreur réseau');
+        }
+        // Show success
+        document.getElementById('wl-form-card').style.display = 'none';
+        document.getElementById('wl-success').style.display   = 'block';
+      })
+      .catch((err) => {
+        console.error('Waitlist submit error:', err);
+        submitBtn.disabled = false;
+        submitText.textContent = originalText;
+        email.classList.add('error');
+        const lang = localStorage.getItem('ladylko_lang') || 'fr';
+        alert(lang === 'fr'
+          ? "Une erreur est survenue. Merci de réessayer dans un instant."
+          : 'Something went wrong. Please try again in a moment.');
+      });
   });
 }
 

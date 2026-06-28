@@ -60,12 +60,38 @@ function initBlog() {
   if (!form) return;
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const email = document.getElementById('nl-email').value;
-    if (email) {
-      const btn = document.getElementById('nl-btn');
-      btn.textContent = '✓';
-      btn.disabled = true;
+    const input = document.getElementById('nl-email');
+    const email = input.value.trim();
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      input.classList.add('error');
+      input.focus();
+      return;
     }
+    input.classList.remove('error');
+    const btn = document.getElementById('nl-btn');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '...';
+
+    // Enregistrement sur la plateforme (Vercel — /api/newsletter)
+    fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, lang: localStorage.getItem('ladylko_lang') || 'fr' })
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || 'Erreur réseau');
+        }
+        btn.textContent = '✓';
+      })
+      .catch((err) => {
+        console.error('Newsletter submit error:', err);
+        btn.disabled = false;
+        btn.textContent = originalText;
+        input.classList.add('error');
+      });
   });
 }
 

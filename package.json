@@ -1,0 +1,13 @@
+{
+  "name": "ladylko-site-internet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site marketing Ladylko + API de collecte des formulaires (Vercel)",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@vercel/kv": "^3.0.0"
+  }
+}

@@ -2,6 +2,10 @@
 
 Site vitrine pré-lancement. Bilingue FR/EN. 6 pages.
 
+> **Déploiement Vercel** : voir [`DEPLOIEMENT-VERCEL.md`](DEPLOIEMENT-VERCEL.md).
+> Le site est dans `public/`, les formulaires sont enregistrés sur la plateforme
+> via Vercel KV, et les données se consultent sur `/admin.html`.
+
 ## Structure du projet
 
 ```
