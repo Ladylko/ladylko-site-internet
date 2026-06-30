@@ -73,6 +73,16 @@
   /* REPLACE with <img src="../assets/..."> */
 }
 
+.detail-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  min-height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  display: block;
+  background: #F3F0EE;
+}
+
 .detail-tag {
   position: absolute;
   bottom: -1rem;
