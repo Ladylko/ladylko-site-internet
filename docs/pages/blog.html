@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Articles & sources — Règles douloureuses, thermothérapie | Ladylko</title>
+  <meta name="description" content="Une sélection d'articles sourcés sur les règles douloureuses, la thermothérapie, l'endométriose et la santé féminine. Dr Jimmy Mohamed, Inserm, Vidal, Cochrane, Ameli, Le Monde…">
+  <meta name="keywords" content="règles douloureuses, dysménorrhée, thermothérapie, endométriose, Dr Jimmy Mohamed, Le Mag de la Santé, FemTech, santé féminine">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://ladylko.com/pages/blog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Articles & sources — Ladylko">
+  <meta property="og:description" content="Articles sourcés sur la dysménorrhée, la thermothérapie et la santé menstruelle.">
+  <meta property="og:image" content="../assets/article-chaleur.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#6B2737">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <style>
+    /* ── Sources externes : grille dense, légère ── */
+    .blog-sources { background: var(--ivoire); padding: 5rem 0 7rem; }
+    .blog-sources__head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .blog-sources__head h2 { color: var(--prune); }
+    .blog-sources__head p { color: var(--muted); max-width: 460px; font-size: 0.92rem; }
+
+    .src-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .src-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(107,39,55,0.08);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    }
+    .src-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 50px -22px rgba(107,39,55,0.22);
+      border-color: rgba(107,39,55,0.18);
+    }
+    .src-card__cover {
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .src-card__cover svg { width: 56px; height: 56px; opacity: 0.92; }
+    .src-card__cover::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.35), transparent 55%);
+      pointer-events: none;
+    }
+    /* dégradés thématiques par card */
+    .cover--prune  { background: linear-gradient(135deg, #6B2737 0%, #6b2d84 100%); color: #fff; }
+    .cover--rose   { background: linear-gradient(135deg, #F1B1B4 0%, #F2C4CD 100%); color: #6B2737; }
+    .cover--ivoire { background: linear-gradient(135deg, #F4EDE4 0%, #F5E9E0 100%); color: #6B2737; }
+    .cover--deep   { background: linear-gradient(135deg, #3a1249 0%, #6B2737 100%); color: #F1B1B4; }
+    .cover--soft   { background: linear-gradient(135deg, #F2C4CD 0%, #F5F0EC 100%); color: #6B2737; }
+    .cover--charcoal { background: linear-gradient(135deg, #1A1A1A 0%, #6B2737 100%); color: #F2C4CD; }
+
+    .src-card__body {
+      padding: 1.3rem 1.4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+    .src-card__source {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--prune);
+      font-weight: 600;
+    }
+    .src-card__title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      line-height: 1.3;
+      color: var(--charcoal);
+      margin: 0;
+    }
+    .src-card__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(107,39,55,0.06);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .src-card__read {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--prune);
+      font-weight: 500;
+      transition: gap .2s var(--ease);
+    }
+    .src-card:hover .src-card__read { gap: 0.55rem; }
+
+    @media (max-width: 900px) {
+      .src-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .src-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Blog",
+    "name":"Articles & sources — Ladylko",
+    "description":"Sélection d'articles sourcés sur la santé menstruelle.",
+    "publisher":{"@type":"Organization","name":"Ladylko"}
+  }
+  </script>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <!-- HEADER -->
+  <section class="blog-header">
+    <div class="container">
+      <div class="pill pill-prune animate-fade-up animate-delay-1" id="blog-pill" data-i18n="blog_pill_1">Articles & sources</div>
+      <h1 class="display animate-fade-up animate-delay-2" id="blog-title">
+        <span data-i18n="blog_title_1">Ce que vous</span><br><em data-i18n="blog_title_2">méritez de savoir.</em>
+      </h1>
+      <p class="body-lg muted animate-fade-up animate-delay-3" id="blog-sub" data-i18n="blog_sub_1">
+        Douleurs menstruelles, thermothérapie, endométriose, FemTech — des contenus rédigés par nos soins, et une sélection d'articles externes vérifiés.
+      </p>
+    </div>
+  </section>
+
+  <!-- ARTICLES INTERNES -->
+  <section class="section blog-grid-section">
+    <div class="container">
+      <div class="blog-grid">
+
+        <!-- Article 1 — featured -->
+        <a href="article-chaleur.html" class="blog-card blog-card--featured blog-card--link reveal">
+          <div class="blog-card__img-wrap">
+            <img src="../assets/article-chaleur.jpg" alt="La chaleur contre les règles douloureuses" loading="lazy" decoding="async" width="800" height="533" style="width:100%;height:100%;object-fit:contain;background:var(--ivoire);display:block;">
+          </div>
+          <div class="blog-card__content">
+            <div class="pill pill-prune" data-i18n="blog_a1_pill">Douleurs menstruelles</div>
+            <h2 class="heading-md" data-i18n="blog_a1_title">La chaleur contre les règles douloureuses : ce que dit la science</h2>
+            <p class="body-sm muted" data-i18n="blog_a1_excerpt">La thermothérapie est reconnue pour son efficacité sur les crampes menstruelles. Une méta-analyse de 2018 confirme une efficacité comparable à l'ibuprofène.</p>
+            <div class="blog-card__footer">
+              <span class="label muted" data-i18n="blog_a1_date">Avril 2026 · Ladylko</span>
+              <span class="blog-card__read"><span data-i18n="blog_a1_cta">Lire l'article</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 2 -->
+        <a href="article-marche.html" class="blog-card blog-card--link reveal">
+          <div class="blog-card__img-wrap blog-card__img-wrap--sm">
+            <img src="../assets/article-marche.jpg" alt="50% des femmes souffrent" loading="lazy" decoding="async" width="600" height="338" style="width:100%;height:100%;object-fit:contain;background:var(--ivoire);display:block;">
+          </div>
+          <div class="blog-card__content">
+            <div class="pill pill-prune" data-i18n="blog_a2_pill">Bien-être</div>
+            <h3 class="heading-md" data-i18n="blog_a2_title">50% des femmes souffrent. Pourquoi le marché ne répond pas vraiment.</h3>
+            <p class="body-sm muted" data-i18n="blog_a2_excerpt">La dysménorrhée touche environ 50% des femmes en âge de procréer. L'offre reste fragmentée et inadaptée au mouvement.</p>
+            <div class="blog-card__footer">
+              <span class="label muted" data-i18n="blog_a2_date">Mars 2026 · Ladylko</span>
+              <span class="blog-card__read"><span data-i18n="blog_a2_cta">Lire</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 3 -->
+        <a href="article-temoignages.html" class="blog-card blog-card--link reveal">
+          <div class="blog-card__img-wrap blog-card__img-wrap--sm">
+            <img src="../assets/article-temoignages.jpg" alt="Témoignages" loading="lazy" decoding="async" width="600" height="338" style="width:100%;height:100%;object-fit:contain;background:var(--ivoire);display:block;">
+          </div>
+          <div class="blog-card__content">
+            <div class="pill pill-prune" data-i18n="blog_a3_pill">Témoignages</div>
+            <h3 class="heading-md" data-i18n="blog_a3_title">« Je ne voulais plus choisir entre soulagement et vie normale. »</h3>
+            <p class="body-sm muted" data-i18n="blog_a3_excerpt">9 femmes sur 10 aux règles douloureuses estiment que cela affecte leur vie quotidienne. L'impact professionnel reste largement sous-estimé.</p>
+            <div class="blog-card__footer">
+              <span class="label muted" data-i18n="blog_a3_date">Février 2026 · Ladylko</span>
+              <span class="blog-card__read"><span data-i18n="blog_a3_cta">Lire</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SOURCES EXTERNES ─── -->
+  <section class="blog-sources">
+    <div class="container">
+      <div class="blog-sources__head reveal">
+        <div>
+          <div class="pill pill-prune" style="margin-bottom:1rem;" data-i18n="blog_src_pill">Sources externes vérifiées</div>
+          <h2 class="heading-lg" data-i18n="blog_src_title">Lectures recommandées</h2>
+        </div>
+        <p data-i18n="blog_src_desc">Médias santé, recherches scientifiques et institutions publiques. Vous y trouverez les données et témoignages qui appuient notre démarche.</p>
+      </div>
+
+      <div class="src-grid">
+
+        <!-- 1. Dr Jimmy Mohamed -->
+        <a class="src-card reveal" href="https://www.allodocteurs.fr/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--prune" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s1_label">Allo Docteurs · France 5</span>
+            <h3 class="src-card__title" data-i18n="blog_s1_title">Dr Jimmy Mohamed : comment soulager les règles douloureuses</h3>
+            <p class="body-sm muted" data-i18n="blog_s1_excerpt">Le médecin du « Mag de la Santé » détaille les solutions efficaces contre la dysménorrhée — chaleur, antalgiques, conseils du quotidien.</p>
+            <div class="src-card__meta">
+              <span>allodocteurs.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 2. Ameli -->
+        <a class="src-card reveal" href="https://www.ameli.fr/assure/sante/themes/regles-douloureuses-dysmenorrhee" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--ivoire" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s2_label">Ameli · Assurance Maladie</span>
+            <h3 class="src-card__title" data-i18n="blog_s2_title">Règles douloureuses (dysménorrhée) : symptômes et conseils</h3>
+            <p class="body-sm muted" data-i18n="blog_s2_excerpt">Le dossier officiel de l'Assurance Maladie : définition, prévalence, gestes utiles, traitements et quand consulter.</p>
+            <div class="src-card__meta">
+              <span>ameli.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3. Inserm -->
+        <a class="src-card reveal" href="https://www.inserm.fr/dossier/endometriose/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--deep" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s3_label">Inserm · Recherche médicale</span>
+            <h3 class="src-card__title" data-i18n="blog_s3_title">Endométriose : une maladie chronique et invalidante</h3>
+            <p class="body-sm muted" data-i18n="blog_s3_excerpt">Le dossier de l'institut national de la santé : 1 femme sur 10 concernée, mécanismes, recherche en cours et prises en charge.</p>
+            <div class="src-card__meta">
+              <span>inserm.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 4. Cochrane -->
+        <a class="src-card reveal" href="https://www.cochranelibrary.com/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--charcoal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 10 15 14 21 8"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s4_label">Cochrane Database · Méta-analyse</span>
+            <h3 class="src-card__title" data-i18n="blog_s4_title">Topical heat for primary dysmenorrhea — la chaleur, aussi efficace que l'ibuprofène</h3>
+            <p class="body-sm muted" data-i18n="blog_s4_excerpt">Revue systématique : la thermothérapie locale (≥39°C) atteint un niveau de soulagement comparable aux AINS sur les crampes menstruelles.</p>
+            <div class="src-card__meta">
+              <span>cochranelibrary.com</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 5. Vidal -->
+        <a class="src-card reveal" href="https://www.vidal.fr/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--rose" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s5_label">Vidal · Référence médicale</span>
+            <h3 class="src-card__title" data-i18n="blog_s5_title">Dysménorrhée : symptômes, causes et traitements</h3>
+            <p class="body-sm muted" data-i18n="blog_s5_excerpt">La fiche médicale Vidal : antalgiques, AINS, contraception hormonale, mesures non médicamenteuses dont l'application de chaleur.</p>
+            <div class="src-card__meta">
+              <span>vidal.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 6. Le Monde -->
+        <a class="src-card reveal" href="https://www.lemonde.fr/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--prune" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s6_label">Le Monde · Société</span>
+            <h3 class="src-card__title" data-i18n="blog_s6_title">Les douleurs menstruelles, ce tabou qui pèse sur la vie professionnelle</h3>
+            <p class="body-sm muted" data-i18n="blog_s6_excerpt">Enquête : pourquoi 1 femme sur 2 dissimule encore ses douleurs au travail, et comment les entreprises commencent à repenser leur politique.</p>
+            <div class="src-card__meta">
+              <span>lemonde.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 7. Doctissimo -->
+        <a class="src-card reveal" href="https://www.doctissimo.fr/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--soft" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s7_label">Doctissimo · Santé femme</span>
+            <h3 class="src-card__title" data-i18n="blog_s7_title">Règles douloureuses : 12 solutions naturelles qui marchent vraiment</h3>
+            <p class="body-sm muted" data-i18n="blog_s7_excerpt">De la bouillotte à l'alimentation anti-inflammatoire, le tour d'horizon des gestes validés pour calmer les crampes sans médicament.</p>
+            <div class="src-card__meta">
+              <span>doctissimo.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 8. TopSanté -->
+        <a class="src-card reveal" href="https://www.topsante.com/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--rose" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M5 8c0 5 3 9 7 12 4-3 7-7 7-12a7 7 0 0 0-14 0z"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s8_label">Top Santé</span>
+            <h3 class="src-card__title" data-i18n="blog_s8_title">Bouillotte chaude : pourquoi elle reste l'arme n°1 contre les crampes</h3>
+            <p class="body-sm muted" data-i18n="blog_s8_excerpt">Effet vasodilatateur, relaxation musculaire, action sur les récepteurs de la douleur — le mécanisme expliqué par les gynécologues.</p>
+            <div class="src-card__meta">
+              <span>topsante.com</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 9. Marie Claire -->
+        <a class="src-card reveal" href="https://www.marieclaire.fr/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--ivoire" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c0-4 4-7 9-7s9 3 9 7"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s9_label">Marie Claire · Témoignages</span>
+            <h3 class="src-card__title" data-i18n="blog_s9_title">Endométriose : « J'ai mis dix ans à être prise au sérieux »</h3>
+            <p class="body-sm muted" data-i18n="blog_s9_excerpt">Plusieurs femmes racontent l'errance médicale, l'impact sur la vie pro et personnelle, et leurs stratégies pour reprendre le contrôle.</p>
+            <div class="src-card__meta">
+              <span>marieclaire.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 10. Les Echos / FemTech -->
+        <a class="src-card reveal" href="https://www.lesechos.fr/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--deep" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/><path d="M12 2a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s10_label">Les Échos · FemTech</span>
+            <h3 class="src-card__title" data-i18n="blog_s10_title">FemTech : la santé féminine prend (enfin) sa revanche</h3>
+            <p class="body-sm muted" data-i18n="blog_s10_excerpt">Un secteur estimé à 60 milliards $ en 2027. Les start-up françaises qui réinventent le cycle, la fertilité et la ménopause.</p>
+            <div class="src-card__meta">
+              <span>lesechos.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 11. OMS -->
+        <a class="src-card reveal" href="https://www.who.int/fr" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--prune" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s11_label">OMS · Santé mondiale</span>
+            <h3 class="src-card__title" data-i18n="blog_s11_title">Santé menstruelle : un enjeu de droits, pas seulement d'hygiène</h3>
+            <p class="body-sm muted" data-i18n="blog_s11_excerpt">L'Organisation Mondiale de la Santé rappelle que la santé menstruelle est un sujet de santé publique transversal, encore largement sous-financé.</p>
+            <div class="src-card__meta">
+              <span>who.int</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 12. ELLE -->
+        <a class="src-card reveal" href="https://www.elle.fr/" target="_blank" rel="noopener noreferrer">
+          <div class="src-card__cover cover--soft" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="src-card__body">
+            <span class="src-card__source" data-i18n="blog_s12_label">ELLE · Bien-être</span>
+            <h3 class="src-card__title" data-i18n="blog_s12_title">Cycle menstruel : le grand retour de la chaleur thérapeutique</h3>
+            <p class="body-sm muted" data-i18n="blog_s12_excerpt">Bouillottes connectées, ceintures chauffantes, vêtements thermo-actifs — pourquoi la chaleur revient au cœur des nouvelles routines féminines.</p>
+            <div class="src-card__meta">
+              <span>elle.fr</span>
+              <span class="src-card__read" data-i18n="blog_src_read">Lire →</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <p style="margin-top:2rem; font-size:0.78rem; color:var(--muted); text-align:center;" data-i18n="blog_src_note">
+        Liens vers les sites des éditeurs. Les titres sont indicatifs — vérifiez la dernière publication sur chaque source. Aucun partenariat commercial.
+      </p>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section-sm blog-newsletter">
+    <div class="container">
+      <div class="blog-newsletter__inner reveal">
+        <div>
+          <h2 class="heading-md" id="nl-title" data-i18n="nl_title">Recevez nos articles.</h2>
+          <p class="body-sm muted" id="nl-sub" data-i18n="nl_sub">Une fois par semaine. Rien de superflu.</p>
+        </div>
+        <form class="nl-form" id="nl-form">
+          <label for="nl-email" class="visually-hidden" style="position:absolute;left:-9999px;" data-i18n="nl_label">Adresse email</label>
+          <input type="email" class="form-input" id="nl-email" placeholder="votre@email.com" data-i18n-placeholder="nl_placeholder" required autocomplete="email">
+          <button type="submit" class="btn btn-primary" id="nl-btn" data-i18n="nl_btn">S'abonner</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="../js/global.js" defer></script>
+  <script src="../js/blog.js" defer></script>
+</body>
+</html>

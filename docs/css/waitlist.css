@@ -1,0 +1,207 @@
+/* ============================================
+   LADYLKO — Waitlist Page
+   ============================================ */
+
+.wl-page {
+  min-height: 100vh;
+  padding: 9rem 0 6rem;
+  background: var(--white);
+}
+
+.wl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+/* ---- COPY ---- */
+.wl-copy h1 {
+  color: var(--prune);
+  margin: 1rem 0;
+}
+
+.wl-copy h1 em {
+  font-style: italic;
+  color: var(--prune-soft);
+}
+
+.wl-copy p {
+  margin-bottom: 2rem;
+  max-width: 420px;
+}
+
+.wl-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wl-perk {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--charcoal);
+}
+
+.wl-perk__icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ---- FORM ---- */
+.wl-form-wrap {
+  position: relative;
+}
+
+.wl-form-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: 0 4px 60px rgba(107,39,55,0.1);
+}
+
+.wl-form-card h2 {
+  color: var(--prune);
+  margin-bottom: 0.4rem;
+}
+
+.wl-form-card > p {
+  margin-bottom: 2rem;
+}
+
+.wl-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--charcoal);
+}
+
+.form-input {
+  padding: 0.875rem 1rem;
+  border: 1.5px solid rgba(107,39,55,0.15);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  background: var(--white);
+  transition: border-color var(--duration-fast) var(--ease);
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.form-input::placeholder { color: rgba(122,110,110,0.5); }
+
+.form-input:focus {
+  border-color: var(--prune);
+  background: var(--white);
+}
+
+.form-input.error { border-color: #c0392b; }
+
+/* Pain options */
+.pain-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pain-option {
+  padding: 0.45rem 1rem;
+  border: 1.5px solid rgba(107,39,55,0.15);
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.pain-option:hover {
+  border-color: var(--prune);
+  color: var(--prune);
+}
+
+.pain-option.selected {
+  background: var(--prune);
+  border-color: var(--prune);
+  color: var(--ivoire);
+}
+
+/* Submit */
+.wl-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+.wl-submit-arrow {
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.wl-submit:hover .wl-submit-arrow {
+  transform: translateX(4px);
+}
+
+.wl-legal {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ---- SUCCESS STATE ---- */
+.wl-success {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 4rem 3rem;
+  box-shadow: 0 4px 60px rgba(107,39,55,0.1);
+  text-align: center;
+  animation: scaleIn 0.5s var(--ease-spring) both;
+}
+
+.wl-success__icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.wl-success h2 {
+  color: var(--prune);
+  margin-bottom: 0.75rem;
+}
+
+.wl-success p {
+  margin-bottom: 2rem;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .wl-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .wl-form-card {
+    padding: 2rem;
+  }
+
+  .wl-copy p { max-width: 100%; }
+}

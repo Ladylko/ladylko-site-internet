@@ -1,0 +1,106 @@
+/* ============================================
+   LADYLKO — Design System
+   ============================================ */
+
+:root {
+  /* ── Brand palette officielle Ladylko ──
+     Bordeaux Velours = couleur principale
+     Noir doux       = couleur de texte
+     Ivoire          = fond + binôme bordeaux
+     Or Rose         = mise en évidence / accent
+  */
+  --prune:      #6B2737;   /* Bordeaux Velours — couleur principale */
+  --prune-deep: #4A1A26;   /* Bordeaux foncé */
+  --prune-soft: #8B3A4A;   /* Bordeaux adouci pour italique / hover */
+  --rose:       #DDAAA2;   /* Or Rose — couleur de mise en évidence */
+  --poudre:     #E8C4BC;   /* Or Rose adouci — bordures, surfaces */
+  --ivoire:     #F4EDE4;   /* Ivoire — fond du site */
+  --ivoire-warm:#EDE3D6;   /* Ivoire chaud — sections alternatives */
+  --charcoal:   #1A1A1A;   /* Noir doux — texte courant */
+  --muted:      #7a6e6e;   /* Gris taupe — texte secondaire */
+  --white:      #ffffff;
+
+  /* Accent — succès / vert (conservé pour formulaires) */
+  --vert:      #C8E6C9;
+  --vert-deep: #4CAF50;
+  --vert-text: #2E7D32;
+
+  /* Typography */
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  8rem;
+  --space-2xl: 12rem;
+
+  /* Layout */
+  --max-width: 1140px;
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 32px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 200ms;
+  --duration-mid:  400ms;
+  --duration-slow: 700ms;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--ivoire);
+  color: var(--charcoal);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Selection */
+::selection {
+  background: var(--rose);
+  color: var(--prune);
+}
+
+/* Focus visible — accessibilité accent Or Rose */
+:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

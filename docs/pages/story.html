@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notre histoire — Ladylko, le short cycliste chauffant pour vos règles</title>
+  <meta name="description" content="Ladylko est née d'un constat universel : la chaleur soulage les règles, mais aucune solution ne tenait debout, ne marchait, ne courait avec vous. Découvrez notre mission FemTech.">
+  <meta name="keywords" content="règles douloureuses, dysménorrhée, short chauffant, FemTech, thermothérapie, douleurs menstruelles, Ladylko">
+  <link rel="canonical" href="https://ladylko.com/pages/story.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Notre histoire — Ladylko">
+  <meta property="og:description" content="Le constat universel qui a tout déclenché. Une femme sur deux le vit, douze fois par an. Ladylko a été pensé pour combler ce vide.">
+  <meta property="og:image" content="../assets/product-hero.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#6B2737">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/story.css">
+  <link rel="preload" as="image" href="../assets/story-hero.jpg" fetchpriority="high">
+  <style>
+    /* ── Hero histoire : image complète au-dessus du texte (zéro crop) ── */
+    .story-hero {
+      position: relative;
+      min-height: auto !important;
+      padding: 7rem 0 4rem !important;
+      background: var(--ivoire) !important;
+    }
+    .story-hero::after { display: none !important; }
+    .story-hero__media {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto 3rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--ivoire);
+      box-shadow: 0 40px 100px -40px rgba(107,39,55,0.22);
+    }
+    .story-hero__media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      background: var(--ivoire);
+    }
+
+    /* ── Section constat : photo + quote en colonne ── */
+    .origin__visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .origin__photo {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--ivoire);
+      box-shadow: 0 30px 80px -40px rgba(107,39,55,0.30);
+    }
+    .origin__photo img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      background: var(--ivoire);
+    }
+    .origin__photo-caption {
+      position: absolute;
+      bottom: 1.1rem;
+      left: 1.1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 500;
+      background: rgba(26,26,26,0.45);
+      padding: 0.5rem 0.85rem;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+    }
+    .origin__quote { padding: 2rem 2.25rem; }
+    .origin__quote blockquote { font-size: 1.25rem; margin-bottom: 1rem; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AboutPage",
+    "name":"Notre histoire — Ladylko",
+    "description":"Origine et mission de Ladylko, short cycliste chauffant à protection absorbante intégrée.",
+    "publisher":{"@type":"Organization","name":"Ladylko","url":"https://ladylko.com"}
+  }
+  </script>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <!-- HERO -->
+  <section class="story-hero">
+    <div class="container">
+      <figure class="story-hero__media">
+        <img src="../assets/story-hero.jpg" alt="Femme marchant dans une rue parisienne au lever du soleil" width="1664" height="936" decoding="async" fetchpriority="high">
+      </figure>
+      <div class="story-hero__content">
+        <div class="pill pill-prune animate-fade-up animate-delay-1" id="sh-pill">Notre histoire</div>
+        <h1 class="display animate-fade-up animate-delay-2" id="sh-title">
+          La chaleur,<br><em>partout où vous allez.</em>
+        </h1>
+        <p class="body-lg animate-fade-up animate-delay-3" id="sh-sub">
+          Ladylko est née d'un constat universel : à la maison, la chaleur soulage. Dès que vous sortez, plus rien ne vous suit. Nous avons décidé de combler ce vide.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN STORY -->
+  <section class="section origin">
+    <div class="container">
+      <div class="origin__grid">
+        <div class="origin__text">
+          <h2 class="heading-lg reveal" id="orig-title">Le constat qui a tout déclenché.</h2>
+          <div class="divider reveal"></div>
+          <p class="body-lg muted reveal" id="orig-p1">
+            Vous connaissez ce moment. La douleur monte, le ventre se noue, vous vous repliez. Vous trouvez la bouillotte. Quelques minutes plus tard, vous respirez à nouveau.
+          </p>
+          <p class="body-md muted reveal" id="orig-p2">
+            Puis il faut sortir. Travail, transports, examens, dîner avec vos amies. La bouillotte, elle, reste à la maison. Vous, non — et la douleur revient, intacte.
+          </p>
+          <p class="body-md muted reveal" id="orig-p3">
+            Une femme sur deux vit ce scénario, douze fois par an. La chaleur soulage, c'est prouvé. Mais aucune solution n'avait été conçue pour bouger avec vous, marcher avec vous, courir avec vous. Ladylko a été pensée pour ça : un vêtement qui transporte enfin la chaleur partout où vous allez.
+          </p>
+        </div>
+        <div class="origin__visual reveal">
+          <figure class="origin__photo">
+            <img src="../assets/story-constat.jpg" alt="Bouillotte chaude posée sur un lit défait, tisane fumante au lever du jour" loading="lazy" decoding="async" width="1132" height="1414">
+            <figcaption class="origin__photo-caption">Chez vous, la chaleur soulage.</figcaption>
+          </figure>
+          <div class="origin__quote">
+            <blockquote id="orig-quote">
+              «&nbsp;Chez moi, ça va. Mais dès que je dois sortir, je subis.&nbsp;»
+            </blockquote>
+            <cite id="orig-cite">Camille, 26 ans — celle pour qui Ladylko a été pensée.</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section team">
+    <div class="container">
+      <div class="section-header" style="text-align:left;">
+        <div class="pill pill-prune reveal" id="team-pill">L'équipe</div>
+        <h2 class="heading-lg reveal" id="team-title">Deux fondateurs.<br>Une conviction partagée.</h2>
+        <div class="divider reveal"></div>
+      </div>
+      <div class="team__grid">
+        <div class="team__card reveal">
+          <div class="team__avatar" id="avatar-mateo">M</div>
+          <div class="team__info">
+            <div class="team__name">Matéo Ledeme</div>
+            <div class="team__role label muted" id="role-mateo">Président — Image de marque & Direction</div>
+            <p class="team__bio muted body-sm" id="bio-mateo">Matéo pilote la vision de Ladylko, l'identité de marque et la stratégie globale. Il est le fil directeur du projet, de la communication à la relation investisseurs.</p>
+          </div>
+        </div>
+        <div class="team__card reveal">
+          <div class="team__avatar" id="avatar-pablo">P</div>
+          <div class="team__info">
+            <div class="team__name">Pablo Ulmischek-Barilko</div>
+            <div class="team__role label muted" id="role-pablo">Directeur Général — Produit & Opérations</div>
+            <p class="team__bio muted body-sm" id="bio-pablo">Pablo pilote le développement produit, les fournisseurs et la chaîne de production. Il est la colonne vertébrale opérationnelle et technique de Ladylko.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="section-sm mission">
+    <div class="container">
+      <div class="mission__inner reveal">
+        <h2 class="heading-xl" id="mission-title">Notre mission ne change pas.</h2>
+        <p class="body-lg" id="mission-body">Permettre à chaque femme de traverser ses règles sans subir — sans rester chez elle, sans médicaments par défaut, sans compromis.</p>
+        <a href="waitlist.html" class="btn btn-light" id="mission-cta">Rejoindre le mouvement</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="../js/global.js"></script>
+  <script src="../js/story.js"></script>
+</body>
+</html>

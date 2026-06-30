@@ -1,0 +1,230 @@
+/* ============================================
+   LADYLKO — Product Page
+   ============================================ */
+
+/* ---- HERO ---- */
+.prod-hero {
+  padding: 10rem 0 6rem;
+  background: var(--white);
+}
+
+.prod-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.prod-hero__text h1 {
+  margin: 1rem 0;
+}
+
+.prod-hero__text p {
+  margin-bottom: 2rem;
+  max-width: 440px;
+}
+
+.prod-img-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #F3F0EE;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  /* REPLACE: <img src="../assets/product.jpg" alt="Ladylko short"> */
+}
+
+/* ---- HOW IT WORKS ---- */
+.how {
+  background: var(--white);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.section-header .pill { margin-bottom: 1rem; }
+.section-header h2 { color: var(--prune); margin-bottom: 0.5rem; }
+
+.how__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.how__step {
+  background: var(--white);
+  border: 1px solid rgba(107,39,55,0.08);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  transition: box-shadow var(--duration-mid) var(--ease), transform var(--duration-mid) var(--ease);
+}
+
+.how__step:hover {
+  box-shadow: 0 8px 40px rgba(107,39,55,0.1);
+  transform: translateY(-4px);
+}
+
+.step-number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--rose);
+  opacity: 0.7;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.how__step h3 {
+  color: var(--prune);
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.how__step p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ---- SPECS ---- */
+.specs {
+  background: var(--white);
+}
+
+.specs__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.specs__text h2 { margin: 1rem 0; }
+
+.spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 1.5rem;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0;
+}
+
+.spec-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.spec-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--prune);
+}
+
+.specs__placeholder {
+  aspect-ratio: 4/5;
+  min-height: 360px;
+}
+
+/* ---- SAFETY ---- */
+.safety {
+  background: var(--white);
+}
+
+.safety__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.safety__text .pill { margin-bottom: 0.75rem; }
+.safety__text h2 { margin-bottom: 0.5rem; }
+.safety__text p { max-width: 480px; }
+
+.safety__badges {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.badge {
+  padding: 0.6rem 1.2rem;
+  border: 1.5px solid var(--prune);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--prune);
+  text-transform: uppercase;
+}
+
+/* ---- PROD CTA ---- */
+.prod-cta-section {
+  background: var(--white);
+}
+
+.prod-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.prod-cta-inner h2 {
+  color: var(--prune);
+}
+
+/* Shopify Buy Button : conteneur du snippet à coller */
+.shopify-buy-button-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shopify-buy-button-wrap:empty {
+  display: none;
+}
+
+/* Spec value highlight en vert pâle pour les infos clés */
+.spec-value.highlight {
+  background: var(--vert);
+  color: var(--vert-text);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .prod-hero__inner,
+  .specs__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .how__steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .prod-cta-inner,
+  .safety__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .safety__badges { justify-content: center; }
+}

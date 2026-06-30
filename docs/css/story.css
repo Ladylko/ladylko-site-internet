@@ -1,0 +1,138 @@
+/* ============================================
+   LADYLKO — Story Page
+   ============================================ */
+
+.story-hero {
+  min-height: 70vh;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 10rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 90% 30%, rgba(255,255,255,0.4) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.story-hero__content { max-width: 700px; }
+.story-hero__content .pill { margin-bottom: 1.5rem; }
+.story-hero__content h1 { color: var(--prune); margin-bottom: 1.5rem; }
+.story-hero__content h1 em { font-style: italic; color: var(--prune-soft); }
+.story-hero__content p { color: var(--muted); max-width: 520px; }
+
+/* ---- ORIGIN ---- */
+.origin { background: var(--white); }
+
+.origin__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.origin__text h2 { margin-bottom: 1rem; }
+.origin__text p  { margin-bottom: 0.75rem; }
+
+.origin__quote {
+  background: var(--white);
+  border: 1.5px solid var(--poudre);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  position: relative;
+}
+
+.origin__quote::before {
+  content: '"';
+  position: absolute;
+  top: -0.5rem;
+  left: 2rem;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  color: var(--poudre);
+  line-height: 1;
+}
+
+blockquote {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--prune);
+  line-height: 1.45;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+cite {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: normal;
+  letter-spacing: 0.03em;
+}
+
+/* ---- TEAM ---- */
+.team { background: var(--white); }
+
+.team__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.team__card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  box-shadow: 0 2px 30px rgba(107,39,55,0.06);
+}
+
+.team__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--prune);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.team__name { font-weight: 500; margin-bottom: 0.25rem; font-size: 1rem; }
+.team__role { margin-bottom: 0.75rem; }
+.team__bio  { line-height: 1.65; }
+
+/* ---- MISSION ---- */
+.mission {
+  background: var(--white);
+}
+
+.mission__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mission__inner h2 { color: var(--prune); margin-bottom: 1rem; }
+.mission__inner p  { color: var(--prune); opacity: 0.75; margin-bottom: 2rem; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .origin__grid,
+  .team__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .team__card { flex-direction: column; }
+}

@@ -1,4 +1,4 @@
-name: Déployer AdPilot sur GitHub Pages
+name: Déployer le site Ladylko sur GitHub Pages
 
 on:
   push:
@@ -31,10 +31,10 @@ jobs:
         with:
           enablement: true
 
-      - name: Préparer l'artefact (dossier de l'application)
+      - name: Préparer l'artefact (site vitrine Ladylko, AdPilot inclus dans /app)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "ladylko site internet version finale/ladylko 12/app"
+          path: "ladylko site internet version finale/ladylko 12"
 
       - name: Déployer sur Pages
         id: deployment
