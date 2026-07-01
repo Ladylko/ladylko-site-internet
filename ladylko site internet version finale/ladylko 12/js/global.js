@@ -255,21 +255,30 @@ function initNav() {
   // Mobile menu
   const burger  = document.querySelector('.nav__burger');
   const mobile  = document.querySelector('.nav__mobile');
-  const mobileLinks = document.querySelectorAll('.nav__mobile .nav__link');
+  const mobileLinks = document.querySelectorAll('.nav__mobile a');
+
+  const closeMobile = () => {
+    mobile.classList.remove('open');
+    burger.classList.remove('open');
+    nav.classList.remove('menu-open');
+    document.body.style.overflow = '';
+  };
 
   if (burger && mobile) {
     burger.addEventListener('click', () => {
       const isOpen = mobile.classList.toggle('open');
       burger.classList.toggle('open', isOpen);
+      nav.classList.toggle('menu-open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobile.classList.remove('open');
-        burger.classList.remove('open');
-        document.body.style.overflow = '';
-      });
+    // Close on link/CTA tap (but not on the language buttons)
+    mobileLinks.forEach(link => link.addEventListener('click', closeMobile));
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobile.classList.contains('open')) closeMobile();
     });
   }
 
@@ -342,12 +351,25 @@ function renderNav() {
 
     <!-- Mobile overlay -->
     <div class="nav__mobile">
-      <a href="../index.html"              class="nav__link" data-i18n="nav_product" style="opacity:0.4; font-size:1rem; font-family:var(--font-body); letter-spacing:0.08em; text-transform:uppercase;">Ladylko</a>
-      <a href="../pages/product.html"      class="nav__link" data-i18n="nav_product">Le produit</a>
-      <a href="../pages/story.html"        class="nav__link" data-i18n="nav_story">Notre histoire</a>
-      <a href="../pages/blog.html"         class="nav__link" data-i18n="nav_blog">Articles</a>
-      <a href="../pages/contact.html"      class="nav__link" data-i18n="nav_contact">Contact</a>
-      <a href="../pages/waitlist.html"     class="nav__link" data-i18n="nav_waitlist">Liste d'attente</a>
+      <div class="nav__mobile-inner">
+        <nav class="nav__mobile-links">
+          <a href="../pages/product.html" class="nav__mlink" data-i18n="nav_product">Le produit</a>
+          <a href="../pages/story.html"   class="nav__mlink" data-i18n="nav_story">Notre histoire</a>
+          <a href="../pages/blog.html"    class="nav__mlink" data-i18n="nav_blog">Articles</a>
+          <a href="../pages/contact.html" class="nav__mlink" data-i18n="nav_contact">Contact</a>
+        </nav>
+        <div class="nav__mobile-foot">
+          <a href="../pages/waitlist.html" class="btn btn-primary nav__mobile-cta" data-i18n="nav_waitlist">Liste d'attente</a>
+          <div class="nav__mobile-meta">
+            <div class="lang-switch">
+              <button class="lang-btn" data-lang="fr">FR</button>
+              <span class="lang-divider">|</span>
+              <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <a class="nav__mobile-ig" href="https://instagram.com/ladylko.paris" target="_blank" rel="noopener">@ladylko.paris</a>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }
