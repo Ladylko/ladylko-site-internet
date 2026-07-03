@@ -103,6 +103,18 @@ h1, h2, h3, h4 {
   box-shadow: 0 12px 40px rgba(0,0,0,0.15);
 }
 
+/* Tactile press feedback — premium micro-interaction on tap/click */
+.btn:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 90ms;
+}
+
+/* No grey tap-flash on iOS/Android — feels native & premium */
+a, button, .btn, .pill, .nav__mlink,
+.pain-option, .ct-subject-btn, .blog-card--link {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ---- NAVIGATION ---- */
 .nav {
   position: fixed;
@@ -214,46 +226,146 @@ h1, h2, h3, h4 {
 .nav__burger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
-  padding: 4px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  z-index: 101;
+  position: relative;
 }
 
 .nav__burger span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 1.5px;
+  margin: 0 auto;
   background: var(--prune);
-  transition: all var(--duration-mid) var(--ease);
+  border-radius: 2px;
+  transition: transform var(--duration-mid) var(--ease),
+              opacity var(--duration-fast) var(--ease);
+}
+
+/* Burger → X when open */
+.nav__burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav__burger.open span:nth-child(2) { opacity: 0; }
+.nav__burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Keep the top bar readable (ivoire wash) while the menu is open */
+.nav.menu-open {
+  background: rgba(244, 237, 228, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .nav__mobile {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--white);
+  inset: 0;
+  background: var(--ivoire);
   z-index: 99;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--duration-mid) var(--ease);
+  transform: translateY(-6px);
+  transition: opacity var(--duration-mid) var(--ease),
+              transform var(--duration-mid) var(--ease);
 }
 
 .nav__mobile.open {
   opacity: 1;
   pointer-events: all;
+  transform: translateY(0);
 }
 
-.nav__mobile .nav__link {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  letter-spacing: -0.02em;
+.nav__mobile-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  padding: calc(5.5rem + env(safe-area-inset-top)) var(--space-md)
+           calc(2.5rem + env(safe-area-inset-bottom));
 }
+
+/* Menu links — editorial, restrained, not oversized */
+.nav__mobile-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.nav__mlink {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--prune);
+  letter-spacing: -0.02em;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(107, 39, 55, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Staggered reveal */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.nav__mlink:first-child { border-top: 1px solid rgba(107, 39, 55, 0.12); }
+
+.nav__mlink::after {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: no-repeat center / contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236B2737' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  transition: transform var(--duration-mid) var(--ease), opacity var(--duration-mid) var(--ease);
+}
+
+.nav__mlink:active::after,
+.nav__mlink:hover::after { transform: translateX(4px); opacity: 0.9; }
+
+.nav__mobile.open .nav__mlink {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav__mobile.open .nav__mlink:nth-child(1) { transition-delay: 0.08s; }
+.nav__mobile.open .nav__mlink:nth-child(2) { transition-delay: 0.14s; }
+.nav__mobile.open .nav__mlink:nth-child(3) { transition-delay: 0.20s; }
+.nav__mobile.open .nav__mlink:nth-child(4) { transition-delay: 0.26s; }
+
+/* Footer of the mobile panel — CTA + language + social */
+.nav__mobile-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.nav__mobile-cta {
+  width: 100%;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+
+.nav__mobile-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__mobile-ig {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.nav__mobile-ig:hover { color: var(--prune); }
 
 /* ---- FOOTER ---- */
 .footer {
@@ -356,6 +468,33 @@ h1, h2, h3, h4 {
   color: var(--ivoire);
 }
 
+/* ---- FORM BASE (partagé — newsletter, etc.) ---- */
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--charcoal);
+}
+
+.form-input {
+  padding: 0.9rem 1rem;
+  border: 1.5px solid rgba(107,39,55,0.15);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 16px;              /* 16px = pas de zoom auto iOS au focus */
+  color: var(--charcoal);
+  background: var(--white);
+  transition: border-color var(--duration-fast) var(--ease);
+  outline: none;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+.form-input::placeholder { color: rgba(122,110,110,0.5); }
+.form-input:focus { border-color: var(--prune); }
+
 /* ---- DIVIDER ---- */
 .divider {
   width: 48px;
@@ -411,14 +550,57 @@ h1, h2, h3, h4 {
   .nav__burger { display: flex; }
   .nav__mobile { display: flex; }
 
+  .nav { padding: 1.15rem 0; }
+  .nav.scrolled { padding: 0.85rem 0; }
+
   .footer__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
   }
+
+  .footer__grid > :first-child { grid-column: 1 / -1; }
 
   .footer__bottom {
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
+  }
+}
+
+/* Phones — tighten the whole rhythm so nothing feels heavy or oversized */
+@media (max-width: 600px) {
+  :root {
+    --space-xl: 4.25rem;   /* 8rem → sections breathe without dominating */
+    --space-lg: 2.75rem;
+    --space-md: 1.5rem;
+  }
+
+  html { font-size: 15px; }
+
+  .display    { font-size: clamp(2.4rem, 11vw, 3rem); line-height: 1.08; }
+  .heading-xl { font-size: clamp(1.9rem, 7.5vw, 2.4rem); }
+  .heading-lg { font-size: clamp(1.6rem, 6vw, 2rem); }
+  .heading-md { font-size: 1.3rem; }
+
+  .body-lg { font-size: 1.02rem; line-height: 1.65; }
+
+  .btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.85rem;
+  }
+
+  .nav__logo { font-size: 1.4rem; }
+
+  /* Confort de lecture : liens & boutons pleinement tappables au pouce */
+  .btn { min-height: 46px; }
+}
+
+/* Respect des préférences système : coupe les animations si demandé */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

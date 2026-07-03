@@ -162,3 +162,9 @@
   .nl-form .form-input { min-width: 0; }
   .nl-form .btn { width: 100%; justify-content: center; }
 }
+
+@media (max-width: 600px) {
+  .blog-header { padding: 7rem 0 3rem; }
+  .blog-card__content { padding: 1.5rem; }
+  .blog-card--featured .blog-card__content { padding: 1.5rem; }
+}
