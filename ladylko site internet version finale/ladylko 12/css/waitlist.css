@@ -91,11 +91,11 @@
 }
 
 .form-input {
-  padding: 0.875rem 1rem;
+  padding: 0.9rem 1rem;
   border: 1.5px solid rgba(107,39,55,0.15);
   border-radius: var(--radius-md);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 16px;   /* 16px = pas de zoom auto iOS au focus */
   color: var(--charcoal);
   background: var(--white);
   transition: border-color var(--duration-fast) var(--ease);
@@ -204,4 +204,12 @@
   }
 
   .wl-copy p { max-width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .wl-page { padding: 7rem 0 4rem; }
+  .wl-form-card { padding: 1.5rem; border-radius: var(--radius-md); }
+  .wl-success { padding: 2.5rem 1.5rem; }
+  /* Pills de douleur : plus faciles à toucher au pouce */
+  .pain-option { padding: 0.6rem 1.1rem; min-height: 40px; display: inline-flex; align-items: center; }
 }

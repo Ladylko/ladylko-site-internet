@@ -103,6 +103,18 @@ h1, h2, h3, h4 {
   box-shadow: 0 12px 40px rgba(0,0,0,0.15);
 }
 
+/* Tactile press feedback — premium micro-interaction on tap/click */
+.btn:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 90ms;
+}
+
+/* No grey tap-flash on iOS/Android — feels native & premium */
+a, button, .btn, .pill, .nav__mlink,
+.pain-option, .ct-subject-btn, .blog-card--link {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ---- NAVIGATION ---- */
 .nav {
   position: fixed;
@@ -456,6 +468,33 @@ h1, h2, h3, h4 {
   color: var(--ivoire);
 }
 
+/* ---- FORM BASE (partagé — newsletter, etc.) ---- */
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--charcoal);
+}
+
+.form-input {
+  padding: 0.9rem 1rem;
+  border: 1.5px solid rgba(107,39,55,0.15);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 16px;              /* 16px = pas de zoom auto iOS au focus */
+  color: var(--charcoal);
+  background: var(--white);
+  transition: border-color var(--duration-fast) var(--ease);
+  outline: none;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+.form-input::placeholder { color: rgba(122,110,110,0.5); }
+.form-input:focus { border-color: var(--prune); }
+
 /* ---- DIVIDER ---- */
 .divider {
   width: 48px;
@@ -551,4 +590,17 @@ h1, h2, h3, h4 {
   }
 
   .nav__logo { font-size: 1.4rem; }
+
+  /* Confort de lecture : liens & boutons pleinement tappables au pouce */
+  .btn { min-height: 46px; }
+}
+
+/* Respect des préférences système : coupe les animations si demandé */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -136,3 +136,10 @@ cite {
 
   .team__card { flex-direction: column; }
 }
+
+@media (max-width: 600px) {
+  .story-hero { padding: 7rem 0 3.5rem; min-height: 0; }
+  .origin__quote { padding: 2rem 1.5rem; }
+  .origin__quote::before { font-size: 4rem; left: 1.25rem; }
+  blockquote { font-size: 1.25rem; }
+}

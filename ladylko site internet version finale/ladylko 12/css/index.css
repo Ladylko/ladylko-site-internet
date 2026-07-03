@@ -388,11 +388,16 @@
    RESPONSIVE
    ============================================ */
 @media (max-width: 900px) {
+  .hero { padding: 6.5rem 0 3rem; min-height: 0; }
   .hero__inner, .problem__grid, .product-teaser__inner {
     grid-template-columns: 1fr; gap: var(--space-lg);
   }
+  .hero__content p { margin-bottom: 1.75rem; }
   .hero__visual { order: -1; }
   .hero__img-placeholder { min-height: 300px; }
+  .proof-bar { padding: 2.25rem 0; }
+  .proof-item__number { font-size: 2.1rem; }
+  .hero__scroll-hint { display: none; }
   .hero__badge--bottom-left { left: 0.5rem; bottom: 1rem; }
   .hero__badge--top-right   { right: 0.5rem; top: 1rem; }
   .hero__badge--mid-left    { display: none; }

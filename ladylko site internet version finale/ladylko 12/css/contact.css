@@ -95,7 +95,7 @@
   border: 1.5px solid rgba(107,39,55,0.15);
   border-radius: 12px;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.95rem;
+  font-size: 16px;   /* 16px = pas de zoom auto iOS au focus */
   color: #1A1A1A;
   background: #F4EDE4;
   transition: border-color 200ms ease;
@@ -107,7 +107,7 @@
 .ct-input::placeholder { color: rgba(122,110,110,0.5); }
 
 .ct-input:focus {
-  border-color: #4F1B64;
+  border-color: var(--prune);
   background: #ffffff;
 }
 
@@ -139,13 +139,13 @@
 }
 
 .ct-subject-btn:hover {
-  border-color: #4F1B64;
-  color: #4F1B64;
+  border-color: var(--prune);
+  color: var(--prune);
 }
 
 .ct-subject-btn.selected {
-  background: #4F1B64;
-  border-color: #4F1B64;
+  background: var(--prune);
+  border-color: var(--prune);
   color: #F4EDE4;
 }
 
@@ -160,7 +160,7 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 100px;
-  background: #4F1B64;
+  background: var(--prune);
   color: #F4EDE4;
   border: none;
   font-family: 'Inter', system-ui, sans-serif;
@@ -169,7 +169,7 @@
 }
 
 .ct-submit:hover {
-  background: #3a1249;
+  background: var(--prune-deep);
   transform: translateY(-2px);
   box-shadow: 0 12px 40px rgba(107,39,55,0.35);
 }
@@ -208,7 +208,7 @@
 }
 
 .ct-success h2 {
-  color: #4F1B64;
+  color: var(--prune);
   margin-bottom: 0.75rem;
 }
 
@@ -225,4 +225,11 @@
   }
   .contact-copy p { max-width: 100%; }
   .contact-form-card { padding: 2rem; }
+}
+
+@media (max-width: 600px) {
+  .contact-page { padding: 7rem 0 4rem; }
+  .contact-form-card { padding: 1.5rem; border-radius: 20px; }
+  .ct-success { padding: 2.5rem 1.5rem; }
+  .ct-subject-btn { padding: 0.6rem 1.1rem; min-height: 40px; display: inline-flex; align-items: center; }
 }
